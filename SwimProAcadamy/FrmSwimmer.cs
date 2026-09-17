@@ -8,13 +8,16 @@ using System.Windows.Forms;
 
 namespace SwimProAcadamy
 {
-    // Keep the Windows Forms base type explicit so this partial class is
-    // correctly recognized by the WinForms designer.
-    public partial class frmRegister : System.Windows.Forms.Form
+    public partial class FrmSwimmer : Form
     {
-        public frmRegister()
+        public FrmSwimmer()
         {
             InitializeComponent();
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
