@@ -8,14 +8,14 @@ using System.Windows.Forms;
 
 namespace SwimProAcadamy
 {
-    public partial class FrmSwimmer : Form
+    public partial class FrmRegister : Form
     {
-        public FrmSwimmer()
+        public FrmRegister()
         {
             InitializeComponent();
         }
 
-        private void lblTitle_Click(object sender, EventArgs e)
+        private void picBackground_Click(object sender, EventArgs e)
         {
 
         }
