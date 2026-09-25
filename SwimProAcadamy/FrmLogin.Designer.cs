@@ -32,6 +32,7 @@
             picBackground = new PictureBox();
             loginCard = new Panel();
             btnRegister = new Button();
+            btnClear = new Button();
             btnLogin = new Button();
             chkShowPassword = new CheckBox();
             txtPassword = new TextBox();
@@ -45,9 +46,9 @@
             loginCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             SuspendLayout();
-            // 
+            //
             // picBackground
-            // 
+            //
             picBackground.BackgroundImage = (Image)resources.GetObject("picBackground.BackgroundImage");
             picBackground.Dock = DockStyle.Fill;
             picBackground.Location = new Point(0, 0);
@@ -60,6 +61,7 @@
             // 
             loginCard.Anchor = AnchorStyles.None;
             loginCard.Controls.Add(btnRegister);
+            loginCard.Controls.Add(btnClear);
             loginCard.Controls.Add(btnLogin);
             loginCard.Controls.Add(chkShowPassword);
             loginCard.Controls.Add(txtPassword);
@@ -82,21 +84,34 @@
             btnRegister.FlatStyle = FlatStyle.Flat;
             btnRegister.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRegister.ForeColor = Color.MidnightBlue;
-            btnRegister.Location = new Point(40, 462);
+            btnRegister.Location = new Point(192, 462);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(350, 40);
-            btnRegister.TabIndex = 6;
+            btnRegister.Size = new Size(215, 40);
+            btnRegister.TabIndex = 7;
             btnRegister.Text = "CREATE ACCOUNT";
             btnRegister.UseVisualStyleBackColor = true;
             // 
-            // btnLogin
+            // btnClear
+            //
+            btnClear.Cursor = Cursors.Hand;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClear.ForeColor = Color.MidnightBlue;
+            btnClear.Location = new Point(16, 462);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(170, 40);
+            btnClear.TabIndex = 6;
+            btnClear.Text = "CLEAR";
+            btnClear.UseVisualStyleBackColor = true;
             // 
+            // btnLogin
+            //
             btnLogin.BackColor = Color.MidnightBlue;
             btnLogin.Cursor = Cursors.Hand;
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(40, 398);
+            btnLogin.Location = new Point(43, 387);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(350, 46);
             btnLogin.TabIndex = 5;
@@ -108,7 +123,7 @@
             chkShowPassword.AutoSize = true;
             chkShowPassword.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             chkShowPassword.ForeColor = Color.DimGray;
-            chkShowPassword.Location = new Point(54, 363);
+            chkShowPassword.Location = new Point(54, 352);
             chkShowPassword.Name = "chkShowPassword";
             chkShowPassword.Size = new Size(164, 29);
             chkShowPassword.TabIndex = 4;
@@ -117,7 +132,7 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(54, 311);
+            txtPassword.Location = new Point(53, 303);
             txtPassword.Name = "txtPassword";
             txtPassword.PlaceholderText = "Enter your password";
             txtPassword.Size = new Size(350, 34);
@@ -128,7 +143,7 @@
             // 
             txtUsername.BackColor = Color.White;
             txtUsername.ForeColor = Color.Black;
-            txtUsername.Location = new Point(53, 226);
+            txtUsername.Location = new Point(53, 213);
             txtUsername.Name = "txtUsername";
             txtUsername.PlaceholderText = "Enter Your Username";
             txtUsername.Size = new Size(350, 34);
@@ -139,20 +154,19 @@
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPassword.ForeColor = Color.DimGray;
-            lblPassword.Location = new Point(54, 280);
+            lblPassword.Location = new Point(54, 262);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(93, 28);
             lblPassword.TabIndex = 1;
             lblPassword.Text = "Password";
             lblPassword.TextAlign = ContentAlignment.MiddleCenter;
-            lblPassword.Click += lblPassword_Click;
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
             lblUsername.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblUsername.ForeColor = Color.DimGray;
-            lblUsername.Location = new Point(54, 195);
+            lblUsername.Location = new Point(53, 182);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(175, 28);
             lblUsername.TabIndex = 1;
@@ -229,5 +243,6 @@
         private Button btnLogin;
         private CheckBox chkShowPassword;
         private Button btnRegister;
+        private Button btnClear;
     }
 }
