@@ -46,14 +46,15 @@
             loginCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             SuspendLayout();
-            //
+            // 
             // picBackground
-            //
+            // 
             picBackground.BackgroundImage = (Image)resources.GetObject("picBackground.BackgroundImage");
+            picBackground.BackgroundImageLayout = ImageLayout.Stretch;
             picBackground.Dock = DockStyle.Fill;
             picBackground.Location = new Point(0, 0);
             picBackground.Name = "picBackground";
-            picBackground.Size = new Size(880, 633);
+            picBackground.Size = new Size(1178, 644);
             picBackground.TabIndex = 0;
             picBackground.TabStop = false;
             // 
@@ -71,7 +72,7 @@
             loginCard.Controls.Add(lblSubtitle);
             loginCard.Controls.Add(lblTitle);
             loginCard.Controls.Add(picLogo);
-            loginCard.Location = new Point(268, 25);
+            loginCard.Location = new Point(410, 60);
             loginCard.MaximumSize = new Size(420, 520);
             loginCard.MinimumSize = new Size(420, 520);
             loginCard.Name = "loginCard";
@@ -92,7 +93,7 @@
             btnRegister.UseVisualStyleBackColor = true;
             // 
             // btnClear
-            //
+            // 
             btnClear.Cursor = Cursors.Hand;
             btnClear.FlatStyle = FlatStyle.Flat;
             btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -105,7 +106,7 @@
             btnClear.UseVisualStyleBackColor = true;
             // 
             // btnLogin
-            //
+            // 
             btnLogin.BackColor = Color.MidnightBlue;
             btnLogin.Cursor = Cursors.Hand;
             btnLogin.FlatStyle = FlatStyle.Flat;
@@ -145,7 +146,7 @@
             txtUsername.ForeColor = Color.Black;
             txtUsername.Location = new Point(53, 213);
             txtUsername.Name = "txtUsername";
-            txtUsername.PlaceholderText = "Enter Your Username";
+            txtUsername.PlaceholderText = "Username";
             txtUsername.Size = new Size(350, 34);
             txtUsername.TabIndex = 2;
             // 
@@ -166,7 +167,7 @@
             lblUsername.AutoSize = true;
             lblUsername.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblUsername.ForeColor = Color.DimGray;
-            lblUsername.Location = new Point(53, 182);
+            lblUsername.Location = new Point(54, 182);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(175, 28);
             lblUsername.TabIndex = 1;
@@ -178,7 +179,7 @@
             lblSubtitle.AutoSize = true;
             lblSubtitle.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitle.ForeColor = Color.DimGray;
-            lblSubtitle.Location = new Point(72, 141);
+            lblSubtitle.Location = new Point(64, 140);
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new Size(292, 28);
             lblSubtitle.TabIndex = 1;
@@ -190,20 +191,21 @@
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.MidnightBlue;
-            lblTitle.Location = new Point(27, 87);
+            lblTitle.Location = new Point(0, 96);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(376, 54);
+            lblTitle.Size = new Size(421, 54);
             lblTitle.TabIndex = 1;
-            lblTitle.Text = "SwimPro Academy";
+            lblTitle.Text = "SWIMPRO ACADEMY";
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picLogo
             // 
+            picLogo.Anchor = AnchorStyles.None;
             picLogo.BackColor = Color.Transparent;
             picLogo.BackgroundImage = (Image)resources.GetObject("picLogo.BackgroundImage");
-            picLogo.Location = new Point(137, 3);
+            picLogo.Location = new Point(150, 3);
             picLogo.Name = "picLogo";
-            picLogo.Size = new Size(152, 81);
+            picLogo.Size = new Size(116, 90);
             picLogo.SizeMode = PictureBoxSizeMode.Zoom;
             picLogo.TabIndex = 0;
             picLogo.TabStop = false;
@@ -212,8 +214,8 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
-            ClientSize = new Size(880, 633);
+            BackColor = Color.AliceBlue;
+            ClientSize = new Size(1178, 644);
             Controls.Add(loginCard);
             Controls.Add(picBackground);
             Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
