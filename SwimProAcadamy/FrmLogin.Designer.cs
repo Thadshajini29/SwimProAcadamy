@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
-            picBackground = new PictureBox();
-            loginCard = new Panel();
-            btnRegister = new Button();
-            btnClear = new Button();
+            pnlLogin = new Panel();
+            lblNoAccount = new Label();
             btnLogin = new Button();
-            chkShowPassword = new CheckBox();
+            lnkRegister = new LinkLabel();
+            lnkForgotPassword = new LinkLabel();
+            chkRemember = new CheckBox();
             txtPassword = new TextBox();
             txtUsername = new TextBox();
             lblPassword = new Label();
@@ -42,170 +42,170 @@
             lblSubtitle = new Label();
             lblTitle = new Label();
             picLogo = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)picBackground).BeginInit();
-            loginCard.SuspendLayout();
+            pnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             SuspendLayout();
             // 
-            // picBackground
+            // pnlLogin
             // 
-            picBackground.BackgroundImage = (Image)resources.GetObject("picBackground.BackgroundImage");
-            picBackground.BackgroundImageLayout = ImageLayout.Stretch;
-            picBackground.Dock = DockStyle.Fill;
-            picBackground.Location = new Point(0, 0);
-            picBackground.Name = "picBackground";
-            picBackground.Size = new Size(1178, 644);
-            picBackground.TabIndex = 0;
-            picBackground.TabStop = false;
+            pnlLogin.BackColor = Color.White;
+            pnlLogin.Controls.Add(lblNoAccount);
+            pnlLogin.Controls.Add(btnLogin);
+            pnlLogin.Controls.Add(lnkRegister);
+            pnlLogin.Controls.Add(lnkForgotPassword);
+            pnlLogin.Controls.Add(chkRemember);
+            pnlLogin.Controls.Add(txtPassword);
+            pnlLogin.Controls.Add(txtUsername);
+            pnlLogin.Controls.Add(lblPassword);
+            pnlLogin.Controls.Add(lblUsername);
+            pnlLogin.Controls.Add(lblSubtitle);
+            pnlLogin.Controls.Add(lblTitle);
+            pnlLogin.Controls.Add(picLogo);
+            pnlLogin.Location = new Point(309, 1);
+            pnlLogin.Name = "pnlLogin";
+            pnlLogin.Size = new Size(430, 550);
+            pnlLogin.TabIndex = 0;
             // 
-            // loginCard
+            // lblNoAccount
             // 
-            loginCard.Anchor = AnchorStyles.None;
-            loginCard.Controls.Add(btnRegister);
-            loginCard.Controls.Add(btnClear);
-            loginCard.Controls.Add(btnLogin);
-            loginCard.Controls.Add(chkShowPassword);
-            loginCard.Controls.Add(txtPassword);
-            loginCard.Controls.Add(txtUsername);
-            loginCard.Controls.Add(lblPassword);
-            loginCard.Controls.Add(lblUsername);
-            loginCard.Controls.Add(lblSubtitle);
-            loginCard.Controls.Add(lblTitle);
-            loginCard.Controls.Add(picLogo);
-            loginCard.Location = new Point(410, 60);
-            loginCard.MaximumSize = new Size(420, 520);
-            loginCard.MinimumSize = new Size(420, 520);
-            loginCard.Name = "loginCard";
-            loginCard.Size = new Size(420, 520);
-            loginCard.TabIndex = 1;
-            // 
-            // btnRegister
-            // 
-            btnRegister.Cursor = Cursors.Hand;
-            btnRegister.FlatStyle = FlatStyle.Flat;
-            btnRegister.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRegister.ForeColor = Color.MidnightBlue;
-            btnRegister.Location = new Point(192, 462);
-            btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(215, 40);
-            btnRegister.TabIndex = 7;
-            btnRegister.Text = "CREATE ACCOUNT";
-            btnRegister.UseVisualStyleBackColor = true;
-            // 
-            // btnClear
-            // 
-            btnClear.Cursor = Cursors.Hand;
-            btnClear.FlatStyle = FlatStyle.Flat;
-            btnClear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnClear.ForeColor = Color.MidnightBlue;
-            btnClear.Location = new Point(16, 462);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(170, 40);
-            btnClear.TabIndex = 6;
-            btnClear.Text = "CLEAR";
-            btnClear.UseVisualStyleBackColor = true;
+            lblNoAccount.AutoSize = true;
+            lblNoAccount.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNoAccount.ForeColor = Color.DimGray;
+            lblNoAccount.Location = new Point(62, 506);
+            lblNoAccount.Name = "lblNoAccount";
+            lblNoAccount.Size = new Size(197, 25);
+            lblNoAccount.TabIndex = 7;
+            lblNoAccount.Text = "Don't have an account?";
             // 
             // btnLogin
             // 
-            btnLogin.BackColor = Color.MidnightBlue;
+            btnLogin.BackColor = Color.DodgerBlue;
             btnLogin.Cursor = Cursors.Hand;
+            btnLogin.FlatAppearance.BorderSize = 0;
             btnLogin.FlatStyle = FlatStyle.Flat;
-            btnLogin.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(43, 387);
+            btnLogin.Location = new Point(51, 445);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(350, 46);
-            btnLogin.TabIndex = 5;
-            btnLogin.Text = "LOGIN";
+            btnLogin.Size = new Size(350, 45);
+            btnLogin.TabIndex = 1;
+            btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = false;
             // 
-            // chkShowPassword
+            // lnkRegister
             // 
-            chkShowPassword.AutoSize = true;
-            chkShowPassword.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkShowPassword.ForeColor = Color.DimGray;
-            chkShowPassword.Location = new Point(54, 352);
-            chkShowPassword.Name = "chkShowPassword";
-            chkShowPassword.Size = new Size(164, 29);
-            chkShowPassword.TabIndex = 4;
-            chkShowPassword.Text = "Show password";
-            chkShowPassword.UseVisualStyleBackColor = true;
+            lnkRegister.AutoSize = true;
+            lnkRegister.BackColor = Color.Transparent;
+            lnkRegister.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lnkRegister.LinkColor = Color.DodgerBlue;
+            lnkRegister.Location = new Point(265, 506);
+            lnkRegister.Name = "lnkRegister";
+            lnkRegister.Size = new Size(82, 25);
+            lnkRegister.TabIndex = 6;
+            lnkRegister.TabStop = true;
+            lnkRegister.Text = "Register";
+            // 
+            // lnkForgotPassword
+            // 
+            lnkForgotPassword.AutoSize = true;
+            lnkForgotPassword.BackColor = Color.Transparent;
+            lnkForgotPassword.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lnkForgotPassword.LinkColor = Color.DodgerBlue;
+            lnkForgotPassword.Location = new Point(234, 391);
+            lnkForgotPassword.Name = "lnkForgotPassword";
+            lnkForgotPassword.Size = new Size(154, 25);
+            lnkForgotPassword.TabIndex = 6;
+            lnkForgotPassword.TabStop = true;
+            lnkForgotPassword.Text = "Forgot Password?";
+            // 
+            // chkRemember
+            // 
+            chkRemember.AutoSize = true;
+            chkRemember.BackColor = Color.Transparent;
+            chkRemember.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chkRemember.ForeColor = Color.DimGray;
+            chkRemember.Location = new Point(62, 390);
+            chkRemember.Name = "chkRemember";
+            chkRemember.Size = new Size(154, 29);
+            chkRemember.TabIndex = 5;
+            chkRemember.Text = "Remember me";
+            chkRemember.UseVisualStyleBackColor = false;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(53, 303);
+            txtPassword.BackColor = Color.White;
+            txtPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPassword.Location = new Point(51, 338);
             txtPassword.Name = "txtPassword";
             txtPassword.PlaceholderText = "Enter your password";
-            txtPassword.Size = new Size(350, 34);
-            txtPassword.TabIndex = 3;
+            txtPassword.Size = new Size(350, 37);
+            txtPassword.TabIndex = 4;
             txtPassword.UseSystemPasswordChar = true;
             // 
             // txtUsername
             // 
             txtUsername.BackColor = Color.White;
-            txtUsername.ForeColor = Color.Black;
-            txtUsername.Location = new Point(53, 213);
+            txtUsername.BorderStyle = BorderStyle.FixedSingle;
+            txtUsername.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUsername.Location = new Point(51, 254);
             txtUsername.Name = "txtUsername";
-            txtUsername.PlaceholderText = "Username";
-            txtUsername.Size = new Size(350, 34);
-            txtUsername.TabIndex = 2;
+            txtUsername.PlaceholderText = "Enter your username or email";
+            txtUsername.Size = new Size(350, 37);
+            txtUsername.TabIndex = 4;
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPassword.ForeColor = Color.DimGray;
-            lblPassword.Location = new Point(54, 262);
+            lblPassword.BackColor = Color.Transparent;
+            lblPassword.ForeColor = Color.Black;
+            lblPassword.Location = new Point(51, 307);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(93, 28);
-            lblPassword.TabIndex = 1;
+            lblPassword.TabIndex = 3;
             lblPassword.Text = "Password";
-            lblPassword.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblUsername.ForeColor = Color.DimGray;
-            lblUsername.Location = new Point(54, 182);
+            lblUsername.BackColor = Color.Transparent;
+            lblUsername.ForeColor = Color.Black;
+            lblUsername.Location = new Point(51, 213);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(175, 28);
-            lblUsername.TabIndex = 1;
+            lblUsername.TabIndex = 3;
             lblUsername.Text = "Username or Email";
-            lblUsername.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblSubtitle
             // 
             lblSubtitle.AutoSize = true;
-            lblSubtitle.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSubtitle.BackColor = Color.Transparent;
             lblSubtitle.ForeColor = Color.DimGray;
-            lblSubtitle.Location = new Point(64, 140);
+            lblSubtitle.Location = new Point(78, 175);
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new Size(292, 28);
-            lblSubtitle.TabIndex = 1;
+            lblSubtitle.TabIndex = 2;
             lblSubtitle.Text = "Swimming Management System";
-            lblSubtitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.BackColor = Color.Transparent;
+            lblTitle.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.MidnightBlue;
-            lblTitle.Location = new Point(0, 96);
+            lblTitle.Location = new Point(14, 118);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(421, 54);
+            lblTitle.Size = new Size(413, 60);
             lblTitle.TabIndex = 1;
-            lblTitle.Text = "SWIMPRO ACADEMY";
-            lblTitle.TextAlign = ContentAlignment.MiddleCenter;
+            lblTitle.Text = "SwimPro Academy";
             // 
             // picLogo
             // 
-            picLogo.Anchor = AnchorStyles.None;
             picLogo.BackColor = Color.Transparent;
-            picLogo.BackgroundImage = (Image)resources.GetObject("picLogo.BackgroundImage");
-            picLogo.Location = new Point(150, 3);
+            picLogo.Image = (Image)resources.GetObject("picLogo.Image");
+            picLogo.Location = new Point(140, 25);
             picLogo.Name = "picLogo";
-            picLogo.Size = new Size(116, 90);
+            picLogo.Size = new Size(150, 90);
             picLogo.SizeMode = PictureBoxSizeMode.Zoom;
             picLogo.TabIndex = 0;
             picLogo.TabStop = false;
@@ -215,36 +215,36 @@
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.AliceBlue;
-            ClientSize = new Size(1178, 644);
-            Controls.Add(loginCard);
-            Controls.Add(picBackground);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(978, 594);
+            Controls.Add(pnlLogin);
             Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            MinimumSize = new Size(900, 600);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "FrmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SwimPro Academy - Login";
-            WindowState = FormWindowState.Maximized;
-            ((System.ComponentModel.ISupportInitialize)picBackground).EndInit();
-            loginCard.ResumeLayout(false);
-            loginCard.PerformLayout();
+            pnlLogin.ResumeLayout(false);
+            pnlLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private PictureBox picBackground;
-        private Panel loginCard;
+        private Panel pnlLogin;
         private PictureBox picLogo;
-        private Label lblTitle;
         private TextBox txtUsername;
         private Label lblUsername;
         private Label lblSubtitle;
+        private Label lblTitle;
+        private LinkLabel lnkForgotPassword;
+        private CheckBox chkRemember;
         private TextBox txtPassword;
         private Label lblPassword;
+        private Label lblNoAccount;
         private Button btnLogin;
-        private CheckBox chkShowPassword;
-        private Button btnRegister;
-        private Button btnClear;
+        private LinkLabel lnkRegister;
     }
 }

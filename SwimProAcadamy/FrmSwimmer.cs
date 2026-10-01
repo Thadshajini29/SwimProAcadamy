@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace SwimProAcadamy
 {
-    public partial class FrmLogin : Form
+    public partial class FrmSwimmer : Form
     {
-        public FrmLogin()
+        public FrmSwimmer()
         {
             InitializeComponent();
         }
