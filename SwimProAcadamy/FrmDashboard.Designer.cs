@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             pnlHeader = new Panel();
-            lblDashboardTitle = new Label();
             lblWelcome = new Label();
+            lblDashboardTitle = new Label();
             pnlSwimmers = new Panel();
-            lblSwimmers = new Label();
             btnSwimmers = new Button();
+            lblSwimmers = new Label();
             pnlFees = new Panel();
             btnFeeCalculator = new Button();
             lblFees = new Label();
@@ -61,6 +61,17 @@
             pnlHeader.Size = new Size(1296, 98);
             pnlHeader.TabIndex = 0;
             // 
+            // lblWelcome
+            // 
+            lblWelcome.AutoSize = true;
+            lblWelcome.BackColor = Color.Transparent;
+            lblWelcome.ForeColor = Color.White;
+            lblWelcome.Location = new Point(856, 32);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(402, 28);
+            lblWelcome.TabIndex = 1;
+            lblWelcome.Text = "Welcome to Swimming Management System";
+            // 
             // lblDashboardTitle
             // 
             lblDashboardTitle.AutoSize = true;
@@ -73,17 +84,6 @@
             lblDashboardTitle.TabIndex = 0;
             lblDashboardTitle.Text = "SwimPro Academy";
             // 
-            // lblWelcome
-            // 
-            lblWelcome.AutoSize = true;
-            lblWelcome.BackColor = Color.Transparent;
-            lblWelcome.ForeColor = Color.White;
-            lblWelcome.Location = new Point(856, 32);
-            lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(402, 28);
-            lblWelcome.TabIndex = 1;
-            lblWelcome.Text = "Welcome to Swimming Management System";
-            // 
             // pnlSwimmers
             // 
             pnlSwimmers.BackColor = Color.White;
@@ -93,17 +93,6 @@
             pnlSwimmers.Name = "pnlSwimmers";
             pnlSwimmers.Size = new Size(250, 220);
             pnlSwimmers.TabIndex = 1;
-            // 
-            // lblSwimmers
-            // 
-            lblSwimmers.AutoSize = true;
-            lblSwimmers.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSwimmers.ForeColor = Color.MidnightBlue;
-            lblSwimmers.Location = new Point(33, 42);
-            lblSwimmers.Name = "lblSwimmers";
-            lblSwimmers.Size = new Size(194, 48);
-            lblSwimmers.TabIndex = 0;
-            lblSwimmers.Text = "Swimmers";
             // 
             // btnSwimmers
             // 
@@ -120,14 +109,25 @@
             btnSwimmers.Text = "Manage Swimmers";
             btnSwimmers.UseVisualStyleBackColor = false;
             // 
+            // lblSwimmers
+            // 
+            lblSwimmers.AutoSize = true;
+            lblSwimmers.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSwimmers.ForeColor = Color.MidnightBlue;
+            lblSwimmers.Location = new Point(33, 42);
+            lblSwimmers.Name = "lblSwimmers";
+            lblSwimmers.Size = new Size(194, 48);
+            lblSwimmers.TabIndex = 0;
+            lblSwimmers.Text = "Swimmers";
+            // 
             // pnlFees
             // 
             pnlFees.BackColor = Color.White;
             pnlFees.Controls.Add(btnFeeCalculator);
             pnlFees.Controls.Add(lblFees);
-            pnlFees.Location = new Point(350, 150);
+            pnlFees.Location = new Point(343, 150);
             pnlFees.Name = "pnlFees";
-            pnlFees.Size = new Size(250, 220);
+            pnlFees.Size = new Size(269, 220);
             pnlFees.TabIndex = 1;
             // 
             // btnFeeCalculator
@@ -150,7 +150,7 @@
             lblFees.AutoSize = true;
             lblFees.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblFees.ForeColor = Color.MidnightBlue;
-            lblFees.Location = new Point(0, 42);
+            lblFees.Location = new Point(10, 45);
             lblFees.Name = "lblFees";
             lblFees.Size = new Size(256, 48);
             lblFees.TabIndex = 0;
@@ -186,7 +186,7 @@
             lblReports.AutoSize = true;
             lblReports.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblReports.ForeColor = Color.MidnightBlue;
-            lblReports.Location = new Point(85, 45);
+            lblReports.Location = new Point(47, 45);
             lblReports.Name = "lblReports";
             lblReports.Size = new Size(151, 48);
             lblReports.TabIndex = 0;
@@ -222,7 +222,7 @@
             lblAccount.AutoSize = true;
             lblAccount.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAccount.ForeColor = Color.MidnightBlue;
-            lblAccount.Location = new Point(85, 45);
+            lblAccount.Location = new Point(61, 45);
             lblAccount.Name = "lblAccount";
             lblAccount.Size = new Size(159, 48);
             lblAccount.TabIndex = 0;
@@ -245,6 +245,7 @@
             Name = "FrmDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SwimPro Academy - Dashboard";
+            Load += FrmDashboard_Load;
             pnlHeader.ResumeLayout(false);
             pnlHeader.PerformLayout();
             pnlSwimmers.ResumeLayout(false);

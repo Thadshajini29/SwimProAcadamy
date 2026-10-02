@@ -31,22 +31,22 @@
             pnlSwimmerHeader = new Panel();
             lblSwimmerTitle = new Label();
             pnlSwimmerInput = new Panel();
-            lblName = new Label();
+            btnClear = new Button();
+            btnDelete = new Button();
+            btnUpdate = new Button();
+            btnAdd = new Button();
+            cmbCompetitionCategory = new ComboBox();
+            cmbTrainingPlan = new ComboBox();
+            nudCoachingHours = new NumericUpDown();
+            nudCompetitions = new NumericUpDown();
+            nudAge = new NumericUpDown();
             txtName = new TextBox();
             lblAge = new Label();
-            nudAge = new NumericUpDown();
-            lblTrainingPlan = new Label();
-            cmbTrainingPlan = new ComboBox();
             lblCompetitionCategory = new Label();
-            cmbCompetitionCategory = new ComboBox();
-            lblCompetitions = new Label();
-            nudCompetitions = new NumericUpDown();
+            lblTrainingPlan = new Label();
             lblCoachingHours = new Label();
-            nudCoachingHours = new NumericUpDown();
-            btnAdd = new Button();
-            btnUpdate = new Button();
-            btnDelete = new Button();
-            btnClear = new Button();
+            lblCompetitions = new Label();
+            lblName = new Label();
             dgvSwimmers = new DataGridView();
             colID = new DataGridViewTextBoxColumn();
             colName = new DataGridViewTextBoxColumn();
@@ -57,9 +57,9 @@
             colCoachingHours = new DataGridViewTextBoxColumn();
             pnlSwimmerHeader.SuspendLayout();
             pnlSwimmerInput.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nudCompetitions).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudCoachingHours).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudCompetitions).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvSwimmers).BeginInit();
             SuspendLayout();
             // 
@@ -108,15 +108,110 @@
             pnlSwimmerInput.Name = "pnlSwimmerInput";
             pnlSwimmerInput.Size = new Size(1140, 260);
             pnlSwimmerInput.TabIndex = 1;
+            pnlSwimmerInput.Paint += pnlSwimmerInput_Paint;
             // 
-            // lblName
+            // btnClear
             // 
-            lblName.AutoSize = true;
-            lblName.Location = new Point(30, 25);
-            lblName.Name = "lblName";
-            lblName.Size = new Size(150, 28);
-            lblName.TabIndex = 0;
-            lblName.Text = "Swimmer Name";
+            btnClear.BackColor = Color.Gray;
+            btnClear.Cursor = Cursors.Hand;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(845, 125);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(130, 40);
+            btnClear.TabIndex = 4;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = false;
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.IndianRed;
+            btnDelete.Cursor = Cursors.Hand;
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Location = new Point(700, 125);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(130, 40);
+            btnDelete.TabIndex = 4;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.SteelBlue;
+            btnUpdate.Cursor = Cursors.Hand;
+            btnUpdate.FlatStyle = FlatStyle.Flat;
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(555, 125);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(130, 40);
+            btnUpdate.TabIndex = 4;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = false;
+            // 
+            // btnAdd
+            // 
+            btnAdd.BackColor = Color.DodgerBlue;
+            btnAdd.Cursor = Cursors.Hand;
+            btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.ForeColor = Color.White;
+            btnAdd.Location = new Point(405, 130);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(130, 40);
+            btnAdd.TabIndex = 4;
+            btnAdd.Text = "Add";
+            btnAdd.UseVisualStyleBackColor = false;
+            // 
+            // cmbCompetitionCategory
+            // 
+            cmbCompetitionCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbCompetitionCategory.FormattingEnabled = true;
+            cmbCompetitionCategory.Items.AddRange(new object[] { "Beginner", "", "Intermediate", "", "Advanced" });
+            cmbCompetitionCategory.Location = new Point(810, 50);
+            cmbCompetitionCategory.Name = "cmbCompetitionCategory";
+            cmbCompetitionCategory.Size = new Size(280, 36);
+            cmbCompetitionCategory.TabIndex = 3;
+            // 
+            // cmbTrainingPlan
+            // 
+            cmbTrainingPlan.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTrainingPlan.FormattingEnabled = true;
+            cmbTrainingPlan.Items.AddRange(new object[] { "Beginner", "", "Intermediate", "", "Advanced" });
+            cmbTrainingPlan.Location = new Point(550, 50);
+            cmbTrainingPlan.Name = "cmbTrainingPlan";
+            cmbTrainingPlan.Size = new Size(230, 36);
+            cmbTrainingPlan.TabIndex = 3;
+            // 
+            // nudCoachingHours
+            // 
+            nudCoachingHours.DecimalPlaces = 1;
+            nudCoachingHours.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nudCoachingHours.Location = new Point(220, 130);
+            nudCoachingHours.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
+            nudCoachingHours.Name = "nudCoachingHours";
+            nudCoachingHours.Size = new Size(150, 37);
+            nudCoachingHours.TabIndex = 2;
+            nudCoachingHours.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // nudCompetitions
+            // 
+            nudCompetitions.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nudCompetitions.Location = new Point(30, 130);
+            nudCompetitions.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
+            nudCompetitions.Name = "nudCompetitions";
+            nudCompetitions.Size = new Size(150, 37);
+            nudCompetitions.TabIndex = 2;
+            nudCompetitions.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // nudAge
+            // 
+            nudAge.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nudAge.Location = new Point(370, 50);
+            nudAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudAge.Name = "nudAge";
+            nudAge.Size = new Size(165, 37);
+            nudAge.TabIndex = 2;
+            nudAge.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // txtName
             // 
@@ -137,15 +232,14 @@
             lblAge.TabIndex = 0;
             lblAge.Text = "Current Age";
             // 
-            // nudAge
+            // lblCompetitionCategory
             // 
-            nudAge.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nudAge.Location = new Point(370, 50);
-            nudAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            nudAge.Name = "nudAge";
-            nudAge.Size = new Size(165, 37);
-            nudAge.TabIndex = 2;
-            nudAge.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            lblCompetitionCategory.AutoSize = true;
+            lblCompetitionCategory.Location = new Point(810, 25);
+            lblCompetitionCategory.Name = "lblCompetitionCategory";
+            lblCompetitionCategory.Size = new Size(247, 28);
+            lblCompetitionCategory.TabIndex = 0;
+            lblCompetitionCategory.Text = "Competition Age Category";
             // 
             // lblTrainingPlan
             // 
@@ -156,34 +250,14 @@
             lblTrainingPlan.TabIndex = 0;
             lblTrainingPlan.Text = "Training Plan";
             // 
-            // cmbTrainingPlan
+            // lblCoachingHours
             // 
-            cmbTrainingPlan.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbTrainingPlan.FormattingEnabled = true;
-            cmbTrainingPlan.Items.AddRange(new object[] { "Beginner", "", "Intermediate", "", "Advanced" });
-            cmbTrainingPlan.Location = new Point(550, 50);
-            cmbTrainingPlan.Name = "cmbTrainingPlan";
-            cmbTrainingPlan.Size = new Size(230, 36);
-            cmbTrainingPlan.TabIndex = 3;
-            // 
-            // lblCompetitionCategory
-            // 
-            lblCompetitionCategory.AutoSize = true;
-            lblCompetitionCategory.Location = new Point(810, 25);
-            lblCompetitionCategory.Name = "lblCompetitionCategory";
-            lblCompetitionCategory.Size = new Size(247, 28);
-            lblCompetitionCategory.TabIndex = 0;
-            lblCompetitionCategory.Text = "Competition Age Category";
-            // 
-            // cmbCompetitionCategory
-            // 
-            cmbCompetitionCategory.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbCompetitionCategory.FormattingEnabled = true;
-            cmbCompetitionCategory.Items.AddRange(new object[] { "Beginner", "", "Intermediate", "", "Advanced" });
-            cmbCompetitionCategory.Location = new Point(810, 50);
-            cmbCompetitionCategory.Name = "cmbCompetitionCategory";
-            cmbCompetitionCategory.Size = new Size(280, 36);
-            cmbCompetitionCategory.TabIndex = 3;
+            lblCoachingHours.AutoSize = true;
+            lblCoachingHours.Location = new Point(220, 105);
+            lblCoachingHours.Name = "lblCoachingHours";
+            lblCoachingHours.Size = new Size(216, 28);
+            lblCoachingHours.TabIndex = 0;
+            lblCoachingHours.Text = "Private Coaching Hours";
             // 
             // lblCompetitions
             // 
@@ -194,87 +268,14 @@
             lblCompetitions.TabIndex = 0;
             lblCompetitions.Text = "Competitions Entered";
             // 
-            // nudCompetitions
+            // lblName
             // 
-            nudCompetitions.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nudCompetitions.Location = new Point(30, 130);
-            nudCompetitions.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
-            nudCompetitions.Name = "nudCompetitions";
-            nudCompetitions.Size = new Size(150, 37);
-            nudCompetitions.TabIndex = 2;
-            nudCompetitions.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // lblCoachingHours
-            // 
-            lblCoachingHours.AutoSize = true;
-            lblCoachingHours.Location = new Point(220, 105);
-            lblCoachingHours.Name = "lblCoachingHours";
-            lblCoachingHours.Size = new Size(216, 28);
-            lblCoachingHours.TabIndex = 0;
-            lblCoachingHours.Text = "Private Coaching Hours";
-            // 
-            // nudCoachingHours
-            // 
-            nudCoachingHours.DecimalPlaces = 1;
-            nudCoachingHours.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nudCoachingHours.Location = new Point(220, 130);
-            nudCoachingHours.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
-            nudCoachingHours.Name = "nudCoachingHours";
-            nudCoachingHours.Size = new Size(150, 37);
-            nudCoachingHours.TabIndex = 2;
-            nudCoachingHours.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // btnAdd
-            // 
-            btnAdd.BackColor = Color.DodgerBlue;
-            btnAdd.Cursor = Cursors.Hand;
-            btnAdd.FlatStyle = FlatStyle.Flat;
-            btnAdd.ForeColor = Color.White;
-            btnAdd.Location = new Point(405, 130);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(130, 40);
-            btnAdd.TabIndex = 4;
-            btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = false;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.BackColor = Color.SteelBlue;
-            btnUpdate.Cursor = Cursors.Hand;
-            btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(555, 125);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(130, 40);
-            btnUpdate.TabIndex = 4;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = false;
-            // 
-            // btnDelete
-            // 
-            btnDelete.BackColor = Color.IndianRed;
-            btnDelete.Cursor = Cursors.Hand;
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(700, 125);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(130, 40);
-            btnDelete.TabIndex = 4;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = false;
-            // 
-            // btnClear
-            // 
-            btnClear.BackColor = Color.Gray;
-            btnClear.Cursor = Cursors.Hand;
-            btnClear.FlatStyle = FlatStyle.Flat;
-            btnClear.ForeColor = Color.White;
-            btnClear.Location = new Point(845, 125);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(130, 40);
-            btnClear.TabIndex = 4;
-            btnClear.Text = "Clear";
-            btnClear.UseVisualStyleBackColor = false;
+            lblName.AutoSize = true;
+            lblName.Location = new Point(30, 25);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(150, 28);
+            lblName.TabIndex = 0;
+            lblName.Text = "Swimmer Name";
             // 
             // dgvSwimmers
             // 
@@ -353,9 +354,9 @@
             pnlSwimmerHeader.PerformLayout();
             pnlSwimmerInput.ResumeLayout(false);
             pnlSwimmerInput.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudAge).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nudCompetitions).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudCoachingHours).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudCompetitions).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvSwimmers).EndInit();
             ResumeLayout(false);
         }

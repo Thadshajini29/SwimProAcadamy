@@ -225,6 +225,7 @@
             Name = "FrmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SwimPro Academy - Login";
+            Load += FrmLogin_Load;
             pnlLogin.ResumeLayout(false);
             pnlLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
