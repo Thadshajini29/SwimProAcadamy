@@ -9,27 +9,27 @@ namespace SwimProAcadamy
     {
         private int selectedSwimmerId;
         private bool feeCalculated;
-        private readonly Button btnSaveFee = new() 
-        { 
+        private readonly Button btnSaveFee = new()
+        {
             Text = "Save Fee",
-            Width = 150, 
-            Height = 45, 
-            Left = 345, 
-            Top = 360, 
+            Width = 150,
+            Height = 45,
+            Left = 345,
+            Top = 360,
             BackColor = Color.MidnightBlue,
-            ForeColor = Color.White, 
-            FlatStyle = FlatStyle.Flat 
+            ForeColor = Color.White,
+            FlatStyle = FlatStyle.Flat
         };
-        private readonly Button btnClear = new() 
-        { 
-            Text = "Clear", 
-            Width = 150, 
-            Height = 45, 
-            Left = 30, 
+        private readonly Button btnClear = new()
+        {
+            Text = "Clear",
+            Width = 150,
+            Height = 45,
+            Left = 30,
             Top = 420,
             BackColor = Color.Gray,
-            ForeColor = Color.White, 
-            FlatStyle = FlatStyle.Flat 
+            ForeColor = Color.White,
+            FlatStyle = FlatStyle.Flat
         };
         public FrmFeeCalculator()
         {
@@ -56,9 +56,9 @@ namespace SwimProAcadamy
                 cmbSwimmer.ValueMember = "id";
                 cmbSwimmer.SelectedIndex = -1;
             }
-            catch (Exception ex) 
-            { 
-                MessageBox.Show("Unable to load swimmers. " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to load swimmers. " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -86,32 +86,32 @@ namespace SwimProAcadamy
                 ResetCostLabels();
                 ShowAgeCategoryStatus();
             }
-            catch (Exception ex) 
-            { 
-                MessageBox.Show("Unable to load swimmer details. " + ex.Message, "Database Error", 
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to load swimmer details. " + ex.Message, "Database Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnCalculate_Click(object? sender, EventArgs e)
         {
-            if (selectedSwimmerId == 0) 
-            { 
+            if (selectedSwimmerId == 0)
+            {
                 MessageBox.Show("Please select a swimmer.",
-                    "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
-                return; 
+                    "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             if (!int.TryParse(txtCompetitionCount.Text, out int competitions) || competitions < 0 ||
                 !decimal.TryParse(txtCoachingHours.Text, out decimal hours) || hours < 0)
-            { 
+            {
                 MessageBox.Show("Competition count and coaching hours must be valid positive numbers.",
                     "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; 
+                return;
             }
             if (hours > SwimProRules.MaximumMonthlyCoachingHours)
-            { 
-                MessageBox.Show("Private coaching cannot exceed 24 hours per month.", "Validation", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+            {
+                MessageBox.Show("Private coaching cannot exceed 24 hours per month.", "Validation",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (competitions > 0 && !SwimProRules.IsCompetitionAllowed(txtSelectedPlan.Text))
@@ -136,42 +136,43 @@ namespace SwimProAcadamy
         {
             bool valid = int.TryParse
                 (txtSelectedAge.Text, out int age) && SwimProRules.AgeMatchesCategory(age, txtSelectedCategory.Text);
-            lblValidationResult.Text = valid ? "Age matches the selected competition category." 
+            lblValidationResult.Text = valid ? "Age matches the selected competition category."
                 : "Age does NOT match the selected competition category.";
             lblValidationResult.ForeColor = valid ? Color.ForestGreen : Color.Firebrick;
         }
         private void btnSaveFee_Click(object? sender, EventArgs e)
         {
             if (selectedSwimmerId == 0 || !feeCalculated)
-            { MessageBox.Show("Calculate the fee before saving it.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; 
+            {
+                MessageBox.Show("Calculate the fee before saving it.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             try
             {
-                decimal training = SwimProRules.GetTrainingFee(txtSelectedPlan.Text); 
-                int competitions = int.Parse(txtCompetitionCount.Text); 
-                decimal hours = decimal.Parse(txtCoachingHours.Text); 
+                decimal training = SwimProRules.GetTrainingFee(txtSelectedPlan.Text);
+                int competitions = int.Parse(txtCompetitionCount.Text);
+                decimal hours = decimal.Parse(txtCoachingHours.Text);
                 decimal competition = competitions * SwimProRules.CompetitionFee;
                 decimal coaching = hours * SwimProRules.CoachingFee;
 
 
-                using MySqlConnection c = new Database().GetConnection(); 
+                using MySqlConnection c = new Database().GetConnection();
                 c.Open();
                 using MySqlCommand cmd = new("INSERT INTO fees(swimmer_id,training_fee,competition_fee,coaching_fee,total_fee)" +
                     " VALUES(@id,@training,@competition,@coaching,@total)", c);
-                cmd.Parameters.AddWithValue("@id", selectedSwimmerId); 
-                
-                cmd.Parameters.AddWithValue("@training", training); 
-                cmd.Parameters.AddWithValue("@competition", competition); 
+                cmd.Parameters.AddWithValue("@id", selectedSwimmerId);
+
+                cmd.Parameters.AddWithValue("@training", training);
+                cmd.Parameters.AddWithValue("@competition", competition);
                 cmd.Parameters.AddWithValue("@coaching", coaching);
-                cmd.Parameters.AddWithValue("@total", training + competition + coaching); 
-                cmd.ExecuteNonQuery(); 
+                cmd.Parameters.AddWithValue("@total", training + competition + coaching);
+                cmd.ExecuteNonQuery();
                 MessageBox.Show("Fee saved successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 MessageBox.Show("Fee could not be saved. " + ex.Message, "Database Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error); 
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -204,6 +205,11 @@ namespace SwimProAcadamy
         }
 
         private void pnlCostBreakdown_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblAgeValidation_Click(object sender, EventArgs e)
         {
 
         }

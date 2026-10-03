@@ -52,6 +52,8 @@
             lblCompetitionCost = new Label();
             lblTrainingCost = new Label();
             lblCostTitle = new Label();
+            btnSaveFee = new Button();
+            btnClear = new Button();
             pnlFeeHeader.SuspendLayout();
             pnlSwimmerDetails.SuspendLayout();
             pnlCostBreakdown.SuspendLayout();
@@ -64,7 +66,7 @@
             pnlFeeHeader.Dock = DockStyle.Top;
             pnlFeeHeader.Location = new Point(0, 0);
             pnlFeeHeader.Name = "pnlFeeHeader";
-            pnlFeeHeader.Size = new Size(1296, 70);
+            pnlFeeHeader.Size = new Size(1178, 70);
             pnlFeeHeader.TabIndex = 0;
             // 
             // lblFeeTitle
@@ -105,7 +107,8 @@
             // txtSelectedAge
             // 
             txtSelectedAge.BackColor = Color.White;
-            txtSelectedAge.Location = new Point(270, 130);
+            txtSelectedAge.BorderStyle = BorderStyle.FixedSingle;
+            txtSelectedAge.Location = new Point(270, 135);
             txtSelectedAge.Name = "txtSelectedAge";
             txtSelectedAge.ReadOnly = true;
             txtSelectedAge.Size = new Size(210, 34);
@@ -114,7 +117,8 @@
             // txtCoachingHours
             // 
             txtCoachingHours.BackColor = Color.White;
-            txtCoachingHours.Location = new Point(270, 290);
+            txtCoachingHours.BorderStyle = BorderStyle.FixedSingle;
+            txtCoachingHours.Location = new Point(270, 295);
             txtCoachingHours.Name = "txtCoachingHours";
             txtCoachingHours.ReadOnly = true;
             txtCoachingHours.Size = new Size(210, 34);
@@ -123,7 +127,8 @@
             // txtCompetitionCount
             // 
             txtCompetitionCount.BackColor = Color.White;
-            txtCompetitionCount.Location = new Point(30, 290);
+            txtCompetitionCount.BorderStyle = BorderStyle.FixedSingle;
+            txtCompetitionCount.Location = new Point(30, 295);
             txtCompetitionCount.Name = "txtCompetitionCount";
             txtCompetitionCount.ReadOnly = true;
             txtCompetitionCount.Size = new Size(210, 34);
@@ -132,7 +137,8 @@
             // txtSelectedCategory
             // 
             txtSelectedCategory.BackColor = Color.White;
-            txtSelectedCategory.Location = new Point(30, 210);
+            txtSelectedCategory.BorderStyle = BorderStyle.FixedSingle;
+            txtSelectedCategory.Location = new Point(30, 215);
             txtSelectedCategory.Name = "txtSelectedCategory";
             txtSelectedCategory.ReadOnly = true;
             txtSelectedCategory.Size = new Size(450, 34);
@@ -141,7 +147,8 @@
             // txtSelectedPlan
             // 
             txtSelectedPlan.BackColor = Color.White;
-            txtSelectedPlan.Location = new Point(30, 130);
+            txtSelectedPlan.BorderStyle = BorderStyle.FixedSingle;
+            txtSelectedPlan.Location = new Point(30, 135);
             txtSelectedPlan.Name = "txtSelectedPlan";
             txtSelectedPlan.ReadOnly = true;
             txtSelectedPlan.Size = new Size(210, 34);
@@ -154,14 +161,14 @@
             cmbSwimmer.FormattingEnabled = true;
             cmbSwimmer.Location = new Point(30, 50);
             cmbSwimmer.Name = "cmbSwimmer";
-            cmbSwimmer.Size = new Size(450, 38);
+            cmbSwimmer.Size = new Size(470, 38);
             cmbSwimmer.TabIndex = 1;
             // 
             // lblSelectedAge
             // 
             lblSelectedAge.AutoSize = true;
             lblSelectedAge.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSelectedAge.Location = new Point(270, 105);
+            lblSelectedAge.Location = new Point(270, 110);
             lblSelectedAge.Name = "lblSelectedAge";
             lblSelectedAge.Size = new Size(126, 28);
             lblSelectedAge.TabIndex = 0;
@@ -171,7 +178,7 @@
             // 
             lblCoachingHours.AutoSize = true;
             lblCoachingHours.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCoachingHours.Location = new Point(270, 265);
+            lblCoachingHours.Location = new Point(270, 270);
             lblCoachingHours.Name = "lblCoachingHours";
             lblCoachingHours.Size = new Size(161, 28);
             lblCoachingHours.TabIndex = 0;
@@ -182,7 +189,7 @@
             lblValidationResult.AutoSize = true;
             lblValidationResult.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblValidationResult.ForeColor = Color.DimGray;
-            lblValidationResult.Location = new Point(30, 380);
+            lblValidationResult.Location = new Point(30, 385);
             lblValidationResult.Name = "lblValidationResult";
             lblValidationResult.Size = new Size(294, 25);
             lblValidationResult.TabIndex = 0;
@@ -193,7 +200,7 @@
             lblAgeValidation.AutoSize = true;
             lblAgeValidation.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAgeValidation.ForeColor = Color.MidnightBlue;
-            lblAgeValidation.Location = new Point(30, 350);
+            lblAgeValidation.Location = new Point(30, 355);
             lblAgeValidation.Name = "lblAgeValidation";
             lblAgeValidation.Size = new Size(286, 28);
             lblAgeValidation.TabIndex = 0;
@@ -203,7 +210,7 @@
             // 
             lblCompetitionCount.AutoSize = true;
             lblCompetitionCount.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCompetitionCount.Location = new Point(30, 265);
+            lblCompetitionCount.Location = new Point(30, 270);
             lblCompetitionCount.Name = "lblCompetitionCount";
             lblCompetitionCount.Size = new Size(217, 28);
             lblCompetitionCount.TabIndex = 0;
@@ -213,7 +220,7 @@
             // 
             lblSelectedCategory.AutoSize = true;
             lblSelectedCategory.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSelectedCategory.Location = new Point(30, 185);
+            lblSelectedCategory.Location = new Point(30, 190);
             lblSelectedCategory.Name = "lblSelectedCategory";
             lblSelectedCategory.Size = new Size(221, 28);
             lblSelectedCategory.TabIndex = 0;
@@ -223,7 +230,7 @@
             // 
             lblSelectedPlan.AutoSize = true;
             lblSelectedPlan.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSelectedPlan.Location = new Point(30, 105);
+            lblSelectedPlan.Location = new Point(30, 110);
             lblSelectedPlan.Name = "lblSelectedPlan";
             lblSelectedPlan.Size = new Size(136, 28);
             lblSelectedPlan.TabIndex = 0;
@@ -233,6 +240,7 @@
             // 
             lblSelectSwimmer.AutoSize = true;
             lblSelectSwimmer.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSelectSwimmer.ForeColor = Color.MidnightBlue;
             lblSelectSwimmer.Location = new Point(30, 25);
             lblSelectSwimmer.Name = "lblSelectSwimmer";
             lblSelectSwimmer.Size = new Size(163, 28);
@@ -242,6 +250,8 @@
             // pnlCostBreakdown
             // 
             pnlCostBreakdown.BackColor = Color.White;
+            pnlCostBreakdown.Controls.Add(btnClear);
+            pnlCostBreakdown.Controls.Add(btnSaveFee);
             pnlCostBreakdown.Controls.Add(btnCalculate);
             pnlCostBreakdown.Controls.Add(lblTotalCost);
             pnlCostBreakdown.Controls.Add(lblCoachingCost);
@@ -250,7 +260,7 @@
             pnlCostBreakdown.Controls.Add(lblCostTitle);
             pnlCostBreakdown.Location = new Point(610, 100);
             pnlCostBreakdown.Name = "pnlCostBreakdown";
-            pnlCostBreakdown.Size = new Size(550, 500);
+            pnlCostBreakdown.Size = new Size(550, 530);
             pnlCostBreakdown.TabIndex = 2;
             pnlCostBreakdown.Paint += pnlCostBreakdown_Paint;
             // 
@@ -324,12 +334,42 @@
             lblCostTitle.TabIndex = 0;
             lblCostTitle.Text = "Monthly Cost Breakdown";
             // 
+            // btnSaveFee
+            // 
+            btnSaveFee.BackColor = Color.SteelBlue;
+            btnSaveFee.Cursor = Cursors.Hand;
+            btnSaveFee.FlatAppearance.BorderSize = 0;
+            btnSaveFee.FlatStyle = FlatStyle.Flat;
+            btnSaveFee.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSaveFee.ForeColor = Color.White;
+            btnSaveFee.Location = new Point(30, 425);
+            btnSaveFee.Name = "btnSaveFee";
+            btnSaveFee.Size = new Size(140, 45);
+            btnSaveFee.TabIndex = 3;
+            btnSaveFee.Text = "Save Fee";
+            btnSaveFee.UseVisualStyleBackColor = false;
+            // 
+            // btnClear
+            // 
+            btnClear.BackColor = Color.Gray;
+            btnClear.Cursor = Cursors.Hand;
+            btnClear.FlatAppearance.BorderSize = 0;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(185, 425);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(140, 45);
+            btnClear.TabIndex = 3;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = false;
+            // 
             // FrmFeeCalculator
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.AliceBlue;
-            ClientSize = new Size(1296, 777);
+            ClientSize = new Size(1178, 694);
             Controls.Add(pnlCostBreakdown);
             Controls.Add(pnlSwimmerDetails);
             Controls.Add(pnlFeeHeader);

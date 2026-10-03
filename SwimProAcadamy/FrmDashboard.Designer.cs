@@ -31,34 +31,47 @@
             pnlHeader = new Panel();
             lblWelcome = new Label();
             lblDashboardTitle = new Label();
+            lblCurrentUser = new Label();
+            btnLogout = new Button();
             pnlSwimmers = new Panel();
+            lblTotalSwimmers = new Label();
+            lblSwimmerCount = new Label();
             btnSwimmers = new Button();
-            lblSwimmers = new Label();
+            pnlTrainingPlans = new Panel();
+            btnTrainingPlans = new Button();
+            lblTrainingPlans = new Label();
             pnlFees = new Panel();
             btnFeeCalculator = new Button();
             lblFees = new Label();
             pnlReports = new Panel();
             btnReports = new Button();
             lblReports = new Label();
-            pnlLogout = new Panel();
-            btnLogout = new Button();
-            lblAccount = new Label();
+            pnlUsers = new Panel();
+            btnUserManagement = new Button();
+            lblUsers = new Label();
+            pnlAudit = new Panel();
+            btnAuditLog = new Button();
+            lblAudit = new Label();
             pnlHeader.SuspendLayout();
             pnlSwimmers.SuspendLayout();
+            pnlTrainingPlans.SuspendLayout();
             pnlFees.SuspendLayout();
             pnlReports.SuspendLayout();
-            pnlLogout.SuspendLayout();
+            pnlUsers.SuspendLayout();
+            pnlAudit.SuspendLayout();
             SuspendLayout();
             // 
             // pnlHeader
             // 
             pnlHeader.BackColor = Color.MidnightBlue;
+            pnlHeader.Controls.Add(btnLogout);
+            pnlHeader.Controls.Add(lblCurrentUser);
             pnlHeader.Controls.Add(lblWelcome);
             pnlHeader.Controls.Add(lblDashboardTitle);
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(1296, 98);
+            pnlHeader.Size = new Size(1178, 80);
             pnlHeader.TabIndex = 0;
             // 
             // lblWelcome
@@ -66,11 +79,11 @@
             lblWelcome.AutoSize = true;
             lblWelcome.BackColor = Color.Transparent;
             lblWelcome.ForeColor = Color.White;
-            lblWelcome.Location = new Point(856, 32);
+            lblWelcome.Location = new Point(32, 48);
             lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(402, 28);
+            lblWelcome.Size = new Size(160, 28);
             lblWelcome.TabIndex = 1;
-            lblWelcome.Text = "Welcome to Swimming Management System";
+            lblWelcome.Text = "Welcome, Admin";
             // 
             // lblDashboardTitle
             // 
@@ -84,159 +97,266 @@
             lblDashboardTitle.TabIndex = 0;
             lblDashboardTitle.Text = "SwimPro Academy";
             // 
+            // lblCurrentUser
+            // 
+            lblCurrentUser.AutoSize = true;
+            lblCurrentUser.BackColor = Color.Transparent;
+            lblCurrentUser.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCurrentUser.ForeColor = Color.White;
+            lblCurrentUser.Location = new Point(980, 25);
+            lblCurrentUser.Name = "lblCurrentUser";
+            lblCurrentUser.Size = new Size(74, 28);
+            lblCurrentUser.TabIndex = 2;
+            lblCurrentUser.Text = "Admin";
+            // 
+            // btnLogout
+            // 
+            btnLogout.BackColor = Color.White;
+            btnLogout.Cursor = Cursors.Hand;
+            btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLogout.ForeColor = Color.MidnightBlue;
+            btnLogout.Location = new Point(1080, 22);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(90, 35);
+            btnLogout.TabIndex = 3;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = false;
+            // 
             // pnlSwimmers
             // 
             pnlSwimmers.BackColor = Color.White;
             pnlSwimmers.Controls.Add(btnSwimmers);
-            pnlSwimmers.Controls.Add(lblSwimmers);
-            pnlSwimmers.Location = new Point(70, 150);
+            pnlSwimmers.Controls.Add(lblSwimmerCount);
+            pnlSwimmers.Controls.Add(lblTotalSwimmers);
+            pnlSwimmers.Location = new Point(50, 120);
             pnlSwimmers.Name = "pnlSwimmers";
-            pnlSwimmers.Size = new Size(250, 220);
+            pnlSwimmers.Size = new Size(330, 220);
             pnlSwimmers.TabIndex = 1;
+            // 
+            // lblTotalSwimmers
+            // 
+            lblTotalSwimmers.AutoSize = true;
+            lblTotalSwimmers.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalSwimmers.ForeColor = Color.MidnightBlue;
+            lblTotalSwimmers.Location = new Point(25, 25);
+            lblTotalSwimmers.Name = "lblTotalSwimmers";
+            lblTotalSwimmers.Size = new Size(194, 32);
+            lblTotalSwimmers.TabIndex = 0;
+            lblTotalSwimmers.Text = "Total Swimmers";
+            // 
+            // lblSwimmerCount
+            // 
+            lblSwimmerCount.AutoSize = true;
+            lblSwimmerCount.Font = new Font("Segoe UI", 28F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSwimmerCount.ForeColor = Color.DodgerBlue;
+            lblSwimmerCount.Location = new Point(25, 60);
+            lblSwimmerCount.Name = "lblSwimmerCount";
+            lblSwimmerCount.Size = new Size(64, 74);
+            lblSwimmerCount.TabIndex = 1;
+            lblSwimmerCount.Text = "5";
             // 
             // btnSwimmers
             // 
             btnSwimmers.BackColor = Color.DodgerBlue;
-            btnSwimmers.Cursor = Cursors.No;
+            btnSwimmers.Cursor = Cursors.Hand;
             btnSwimmers.FlatAppearance.BorderSize = 0;
             btnSwimmers.FlatStyle = FlatStyle.Flat;
-            btnSwimmers.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSwimmers.ForeColor = Color.White;
-            btnSwimmers.Location = new Point(17, 125);
+            btnSwimmers.Location = new Point(25, 145);
             btnSwimmers.Name = "btnSwimmers";
-            btnSwimmers.Size = new Size(220, 45);
-            btnSwimmers.TabIndex = 1;
+            btnSwimmers.Size = new Size(250, 40);
+            btnSwimmers.TabIndex = 2;
             btnSwimmers.Text = "Manage Swimmers";
             btnSwimmers.UseVisualStyleBackColor = false;
             // 
-            // lblSwimmers
+            // pnlTrainingPlans
             // 
-            lblSwimmers.AutoSize = true;
-            lblSwimmers.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSwimmers.ForeColor = Color.MidnightBlue;
-            lblSwimmers.Location = new Point(33, 42);
-            lblSwimmers.Name = "lblSwimmers";
-            lblSwimmers.Size = new Size(194, 48);
-            lblSwimmers.TabIndex = 0;
-            lblSwimmers.Text = "Swimmers";
+            pnlTrainingPlans.BackColor = Color.White;
+            pnlTrainingPlans.Controls.Add(btnTrainingPlans);
+            pnlTrainingPlans.Controls.Add(lblTrainingPlans);
+            pnlTrainingPlans.Location = new Point(435, 120);
+            pnlTrainingPlans.Name = "pnlTrainingPlans";
+            pnlTrainingPlans.Size = new Size(330, 220);
+            pnlTrainingPlans.TabIndex = 1;
+            // 
+            // btnTrainingPlans
+            // 
+            btnTrainingPlans.BackColor = Color.DodgerBlue;
+            btnTrainingPlans.Cursor = Cursors.Hand;
+            btnTrainingPlans.FlatAppearance.BorderSize = 0;
+            btnTrainingPlans.FlatStyle = FlatStyle.Flat;
+            btnTrainingPlans.ForeColor = Color.White;
+            btnTrainingPlans.Location = new Point(25, 145);
+            btnTrainingPlans.Name = "btnTrainingPlans";
+            btnTrainingPlans.Size = new Size(250, 40);
+            btnTrainingPlans.TabIndex = 2;
+            btnTrainingPlans.Text = "Manage Plans";
+            btnTrainingPlans.UseVisualStyleBackColor = false;
+            // 
+            // lblTrainingPlans
+            // 
+            lblTrainingPlans.AutoSize = true;
+            lblTrainingPlans.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTrainingPlans.ForeColor = Color.MidnightBlue;
+            lblTrainingPlans.Location = new Point(25, 25);
+            lblTrainingPlans.Name = "lblTrainingPlans";
+            lblTrainingPlans.Size = new Size(176, 32);
+            lblTrainingPlans.TabIndex = 0;
+            lblTrainingPlans.Text = "Training Plans";
             // 
             // pnlFees
             // 
             pnlFees.BackColor = Color.White;
             pnlFees.Controls.Add(btnFeeCalculator);
             pnlFees.Controls.Add(lblFees);
-            pnlFees.Location = new Point(343, 150);
+            pnlFees.Location = new Point(820, 120);
             pnlFees.Name = "pnlFees";
-            pnlFees.Size = new Size(269, 220);
+            pnlFees.Size = new Size(330, 220);
             pnlFees.TabIndex = 1;
             // 
             // btnFeeCalculator
             // 
             btnFeeCalculator.BackColor = Color.DodgerBlue;
-            btnFeeCalculator.Cursor = Cursors.No;
+            btnFeeCalculator.Cursor = Cursors.Hand;
             btnFeeCalculator.FlatAppearance.BorderSize = 0;
             btnFeeCalculator.FlatStyle = FlatStyle.Flat;
-            btnFeeCalculator.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFeeCalculator.ForeColor = Color.White;
-            btnFeeCalculator.Location = new Point(30, 125);
+            btnFeeCalculator.Location = new Point(25, 145);
             btnFeeCalculator.Name = "btnFeeCalculator";
-            btnFeeCalculator.Size = new Size(190, 45);
-            btnFeeCalculator.TabIndex = 1;
+            btnFeeCalculator.Size = new Size(250, 40);
+            btnFeeCalculator.TabIndex = 2;
             btnFeeCalculator.Text = "Calculate Fees";
             btnFeeCalculator.UseVisualStyleBackColor = false;
             // 
             // lblFees
             // 
             lblFees.AutoSize = true;
-            lblFees.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFees.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblFees.ForeColor = Color.MidnightBlue;
-            lblFees.Location = new Point(10, 45);
+            lblFees.Location = new Point(25, 25);
             lblFees.Name = "lblFees";
-            lblFees.Size = new Size(256, 48);
+            lblFees.Size = new Size(166, 32);
             lblFees.TabIndex = 0;
-            lblFees.Text = "Fee Calculator";
+            lblFees.Text = "Monthly Fees";
             // 
             // pnlReports
             // 
             pnlReports.BackColor = Color.White;
             pnlReports.Controls.Add(btnReports);
             pnlReports.Controls.Add(lblReports);
-            pnlReports.Location = new Point(630, 150);
+            pnlReports.Location = new Point(50, 370);
             pnlReports.Name = "pnlReports";
-            pnlReports.Size = new Size(250, 220);
+            pnlReports.Size = new Size(330, 220);
             pnlReports.TabIndex = 1;
             // 
             // btnReports
             // 
             btnReports.BackColor = Color.DodgerBlue;
-            btnReports.Cursor = Cursors.No;
+            btnReports.Cursor = Cursors.Hand;
             btnReports.FlatAppearance.BorderSize = 0;
             btnReports.FlatStyle = FlatStyle.Flat;
-            btnReports.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnReports.ForeColor = Color.White;
-            btnReports.Location = new Point(30, 125);
+            btnReports.Location = new Point(25, 145);
             btnReports.Name = "btnReports";
-            btnReports.Size = new Size(190, 45);
-            btnReports.TabIndex = 1;
+            btnReports.Size = new Size(250, 40);
+            btnReports.TabIndex = 2;
             btnReports.Text = "View Reports";
             btnReports.UseVisualStyleBackColor = false;
             // 
             // lblReports
             // 
             lblReports.AutoSize = true;
-            lblReports.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblReports.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblReports.ForeColor = Color.MidnightBlue;
-            lblReports.Location = new Point(47, 45);
+            lblReports.Location = new Point(25, 25);
             lblReports.Name = "lblReports";
-            lblReports.Size = new Size(151, 48);
+            lblReports.Size = new Size(103, 32);
             lblReports.TabIndex = 0;
             lblReports.Text = "Reports";
             // 
-            // pnlLogout
+            // pnlUsers
             // 
-            pnlLogout.BackColor = Color.White;
-            pnlLogout.Controls.Add(btnLogout);
-            pnlLogout.Controls.Add(lblAccount);
-            pnlLogout.Location = new Point(910, 150);
-            pnlLogout.Name = "pnlLogout";
-            pnlLogout.Size = new Size(250, 220);
-            pnlLogout.TabIndex = 1;
+            pnlUsers.BackColor = Color.White;
+            pnlUsers.Controls.Add(btnUserManagement);
+            pnlUsers.Controls.Add(lblUsers);
+            pnlUsers.Location = new Point(435, 370);
+            pnlUsers.Name = "pnlUsers";
+            pnlUsers.Size = new Size(330, 220);
+            pnlUsers.TabIndex = 1;
             // 
-            // btnLogout
+            // btnUserManagement
             // 
-            btnLogout.BackColor = Color.DodgerBlue;
-            btnLogout.Cursor = Cursors.No;
-            btnLogout.FlatAppearance.BorderSize = 0;
-            btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(30, 125);
-            btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(190, 45);
-            btnLogout.TabIndex = 1;
-            btnLogout.Text = "Logout";
-            btnLogout.UseVisualStyleBackColor = false;
+            btnUserManagement.BackColor = Color.DodgerBlue;
+            btnUserManagement.Cursor = Cursors.Hand;
+            btnUserManagement.FlatAppearance.BorderSize = 0;
+            btnUserManagement.FlatStyle = FlatStyle.Flat;
+            btnUserManagement.ForeColor = Color.White;
+            btnUserManagement.Location = new Point(25, 145);
+            btnUserManagement.Name = "btnUserManagement";
+            btnUserManagement.Size = new Size(250, 40);
+            btnUserManagement.TabIndex = 2;
+            btnUserManagement.Text = "Manage Users";
+            btnUserManagement.UseVisualStyleBackColor = false;
             // 
-            // lblAccount
+            // lblUsers
             // 
-            lblAccount.AutoSize = true;
-            lblAccount.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAccount.ForeColor = Color.MidnightBlue;
-            lblAccount.Location = new Point(61, 45);
-            lblAccount.Name = "lblAccount";
-            lblAccount.Size = new Size(159, 48);
-            lblAccount.TabIndex = 0;
-            lblAccount.Text = "Account";
+            lblUsers.AutoSize = true;
+            lblUsers.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsers.ForeColor = Color.MidnightBlue;
+            lblUsers.Location = new Point(25, 25);
+            lblUsers.Name = "lblUsers";
+            lblUsers.Size = new Size(223, 32);
+            lblUsers.TabIndex = 0;
+            lblUsers.Text = "User Management";
+            // 
+            // pnlAudit
+            // 
+            pnlAudit.BackColor = Color.White;
+            pnlAudit.Controls.Add(btnAuditLog);
+            pnlAudit.Controls.Add(lblAudit);
+            pnlAudit.Location = new Point(820, 370);
+            pnlAudit.Name = "pnlAudit";
+            pnlAudit.Size = new Size(330, 220);
+            pnlAudit.TabIndex = 1;
+            // 
+            // btnAuditLog
+            // 
+            btnAuditLog.BackColor = Color.DodgerBlue;
+            btnAuditLog.Cursor = Cursors.Hand;
+            btnAuditLog.FlatAppearance.BorderSize = 0;
+            btnAuditLog.FlatStyle = FlatStyle.Flat;
+            btnAuditLog.ForeColor = Color.White;
+            btnAuditLog.Location = new Point(25, 145);
+            btnAuditLog.Name = "btnAuditLog";
+            btnAuditLog.Size = new Size(250, 40);
+            btnAuditLog.TabIndex = 2;
+            btnAuditLog.Text = "View Activity";
+            btnAuditLog.UseVisualStyleBackColor = false;
+            // 
+            // lblAudit
+            // 
+            lblAudit.AutoSize = true;
+            lblAudit.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAudit.ForeColor = Color.MidnightBlue;
+            lblAudit.Location = new Point(25, 25);
+            lblAudit.Name = "lblAudit";
+            lblAudit.Size = new Size(188, 32);
+            lblAudit.TabIndex = 0;
+            lblAudit.Text = "System Activity";
             // 
             // FrmDashboard
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.AliceBlue;
-            ClientSize = new Size(1296, 721);
-            Controls.Add(pnlLogout);
-            Controls.Add(pnlReports);
+            ClientSize = new Size(1178, 644);
             Controls.Add(pnlFees);
+            Controls.Add(pnlTrainingPlans);
+            Controls.Add(pnlAudit);
+            Controls.Add(pnlUsers);
+            Controls.Add(pnlReports);
             Controls.Add(pnlSwimmers);
             Controls.Add(pnlHeader);
             Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -250,12 +370,16 @@
             pnlHeader.PerformLayout();
             pnlSwimmers.ResumeLayout(false);
             pnlSwimmers.PerformLayout();
+            pnlTrainingPlans.ResumeLayout(false);
+            pnlTrainingPlans.PerformLayout();
             pnlFees.ResumeLayout(false);
             pnlFees.PerformLayout();
             pnlReports.ResumeLayout(false);
             pnlReports.PerformLayout();
-            pnlLogout.ResumeLayout(false);
-            pnlLogout.PerformLayout();
+            pnlUsers.ResumeLayout(false);
+            pnlUsers.PerformLayout();
+            pnlAudit.ResumeLayout(false);
+            pnlAudit.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -264,17 +388,26 @@
         private Panel pnlHeader;
         private Label lblDashboardTitle;
         private Label lblWelcome;
+        private Label lblCurrentUser;
+        private Button btnLogout;
         private Panel pnlSwimmers;
-        private Label lblSwimmers;
+        private Label lblTotalSwimmers;
         private Button btnSwimmers;
+        private Label lblSwimmerCount;
+        private Panel pnlTrainingPlans;
+        private Button btnTrainingPlans;
+        private Label lblTrainingPlans;
         private Panel pnlFees;
         private Button btnFeeCalculator;
         private Label lblFees;
         private Panel pnlReports;
         private Button btnReports;
         private Label lblReports;
-        private Panel pnlLogout;
-        private Button btnLogout;
-        private Label lblAccount;
+        private Panel pnlUsers;
+        private Button btnUserManagement;
+        private Label lblUsers;
+        private Panel pnlAudit;
+        private Button btnAuditLog;
+        private Label lblAudit;
     }
 }

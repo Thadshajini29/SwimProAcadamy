@@ -55,6 +55,10 @@
             colCompetitionCategory = new DataGridViewTextBoxColumn();
             colCompetitions = new DataGridViewTextBoxColumn();
             colCoachingHours = new DataGridViewTextBoxColumn();
+            lblSearch = new Label();
+            txtSearch = new TextBox();
+            btnSearch = new Button();
+            colStatus = new DataGridViewTextBoxColumn();
             pnlSwimmerHeader.SuspendLayout();
             pnlSwimmerInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudCoachingHours).BeginInit();
@@ -88,6 +92,9 @@
             // pnlSwimmerInput
             // 
             pnlSwimmerInput.BackColor = Color.White;
+            pnlSwimmerInput.Controls.Add(btnSearch);
+            pnlSwimmerInput.Controls.Add(txtSearch);
+            pnlSwimmerInput.Controls.Add(lblSearch);
             pnlSwimmerInput.Controls.Add(btnClear);
             pnlSwimmerInput.Controls.Add(btnDelete);
             pnlSwimmerInput.Controls.Add(btnUpdate);
@@ -106,7 +113,7 @@
             pnlSwimmerInput.Controls.Add(lblName);
             pnlSwimmerInput.Location = new Point(30, 95);
             pnlSwimmerInput.Name = "pnlSwimmerInput";
-            pnlSwimmerInput.Size = new Size(1140, 260);
+            pnlSwimmerInput.Size = new Size(1140, 328);
             pnlSwimmerInput.TabIndex = 1;
             pnlSwimmerInput.Paint += pnlSwimmerInput_Paint;
             // 
@@ -116,7 +123,7 @@
             btnClear.Cursor = Cursors.Hand;
             btnClear.FlatStyle = FlatStyle.Flat;
             btnClear.ForeColor = Color.White;
-            btnClear.Location = new Point(845, 125);
+            btnClear.Location = new Point(737, 181);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(130, 40);
             btnClear.TabIndex = 4;
@@ -129,7 +136,7 @@
             btnDelete.Cursor = Cursors.Hand;
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(700, 125);
+            btnDelete.Location = new Point(554, 181);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(130, 40);
             btnDelete.TabIndex = 4;
@@ -142,7 +149,7 @@
             btnUpdate.Cursor = Cursors.Hand;
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(555, 125);
+            btnUpdate.Location = new Point(385, 181);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(130, 40);
             btnUpdate.TabIndex = 4;
@@ -155,7 +162,7 @@
             btnAdd.Cursor = Cursors.Hand;
             btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.ForeColor = Color.White;
-            btnAdd.Location = new Point(405, 130);
+            btnAdd.Location = new Point(220, 181);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(130, 40);
             btnAdd.TabIndex = 4;
@@ -167,7 +174,7 @@
             cmbCompetitionCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbCompetitionCategory.FormattingEnabled = true;
             cmbCompetitionCategory.Items.AddRange(new object[] { "Beginner", "", "Intermediate", "", "Advanced" });
-            cmbCompetitionCategory.Location = new Point(810, 50);
+            cmbCompetitionCategory.Location = new Point(790, 45);
             cmbCompetitionCategory.Name = "cmbCompetitionCategory";
             cmbCompetitionCategory.Size = new Size(280, 36);
             cmbCompetitionCategory.TabIndex = 3;
@@ -177,7 +184,7 @@
             cmbTrainingPlan.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTrainingPlan.FormattingEnabled = true;
             cmbTrainingPlan.Items.AddRange(new object[] { "Beginner", "", "Intermediate", "", "Advanced" });
-            cmbTrainingPlan.Location = new Point(550, 50);
+            cmbTrainingPlan.Location = new Point(530, 45);
             cmbTrainingPlan.Name = "cmbTrainingPlan";
             cmbTrainingPlan.Size = new Size(230, 36);
             cmbTrainingPlan.TabIndex = 3;
@@ -186,17 +193,16 @@
             // 
             nudCoachingHours.DecimalPlaces = 1;
             nudCoachingHours.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nudCoachingHours.Location = new Point(220, 130);
+            nudCoachingHours.Location = new Point(299, 125);
             nudCoachingHours.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
             nudCoachingHours.Name = "nudCoachingHours";
             nudCoachingHours.Size = new Size(150, 37);
             nudCoachingHours.TabIndex = 2;
-            nudCoachingHours.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // nudCompetitions
             // 
             nudCompetitions.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nudCompetitions.Location = new Point(30, 130);
+            nudCompetitions.Location = new Point(30, 125);
             nudCompetitions.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             nudCompetitions.Name = "nudCompetitions";
             nudCompetitions.Size = new Size(150, 37);
@@ -206,7 +212,7 @@
             // nudAge
             // 
             nudAge.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nudAge.Location = new Point(370, 50);
+            nudAge.Location = new Point(350, 45);
             nudAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudAge.Name = "nudAge";
             nudAge.Size = new Size(165, 37);
@@ -217,7 +223,7 @@
             // 
             txtName.BorderStyle = BorderStyle.FixedSingle;
             txtName.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtName.Location = new Point(30, 50);
+            txtName.Location = new Point(30, 45);
             txtName.Name = "txtName";
             txtName.PlaceholderText = "Enter swimmer name";
             txtName.Size = new Size(300, 37);
@@ -226,7 +232,7 @@
             // lblAge
             // 
             lblAge.AutoSize = true;
-            lblAge.Location = new Point(370, 25);
+            lblAge.Location = new Point(350, 20);
             lblAge.Name = "lblAge";
             lblAge.Size = new Size(117, 28);
             lblAge.TabIndex = 0;
@@ -235,7 +241,7 @@
             // lblCompetitionCategory
             // 
             lblCompetitionCategory.AutoSize = true;
-            lblCompetitionCategory.Location = new Point(810, 25);
+            lblCompetitionCategory.Location = new Point(790, 20);
             lblCompetitionCategory.Name = "lblCompetitionCategory";
             lblCompetitionCategory.Size = new Size(247, 28);
             lblCompetitionCategory.TabIndex = 0;
@@ -244,7 +250,7 @@
             // lblTrainingPlan
             // 
             lblTrainingPlan.AutoSize = true;
-            lblTrainingPlan.Location = new Point(550, 25);
+            lblTrainingPlan.Location = new Point(530, 20);
             lblTrainingPlan.Name = "lblTrainingPlan";
             lblTrainingPlan.Size = new Size(123, 28);
             lblTrainingPlan.TabIndex = 0;
@@ -253,7 +259,7 @@
             // lblCoachingHours
             // 
             lblCoachingHours.AutoSize = true;
-            lblCoachingHours.Location = new Point(220, 105);
+            lblCoachingHours.Location = new Point(299, 94);
             lblCoachingHours.Name = "lblCoachingHours";
             lblCoachingHours.Size = new Size(216, 28);
             lblCoachingHours.TabIndex = 0;
@@ -262,16 +268,16 @@
             // lblCompetitions
             // 
             lblCompetitions.AutoSize = true;
-            lblCompetitions.Location = new Point(30, 105);
+            lblCompetitions.Location = new Point(30, 100);
             lblCompetitions.Name = "lblCompetitions";
-            lblCompetitions.Size = new Size(202, 28);
+            lblCompetitions.Size = new Size(230, 28);
             lblCompetitions.TabIndex = 0;
-            lblCompetitions.Text = "Competitions Entered";
+            lblCompetitions.Text = "Number of Competitions";
             // 
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(30, 25);
+            lblName.Location = new Point(30, 20);
             lblName.Name = "lblName";
             lblName.Size = new Size(150, 28);
             lblName.TabIndex = 0;
@@ -283,14 +289,14 @@
             dgvSwimmers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSwimmers.BackgroundColor = Color.White;
             dgvSwimmers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSwimmers.Columns.AddRange(new DataGridViewColumn[] { colID, colName, colAge, colTrainingPlan, colCompetitionCategory, colCompetitions, colCoachingHours });
-            dgvSwimmers.Location = new Point(30, 375);
+            dgvSwimmers.Columns.AddRange(new DataGridViewColumn[] { colID, colName, colAge, colTrainingPlan, colCompetitionCategory, colCompetitions, colCoachingHours, colStatus });
+            dgvSwimmers.Location = new Point(30, 429);
             dgvSwimmers.MultiSelect = false;
             dgvSwimmers.Name = "dgvSwimmers";
             dgvSwimmers.RowHeadersVisible = false;
             dgvSwimmers.RowHeadersWidth = 62;
             dgvSwimmers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvSwimmers.Size = new Size(1140, 300);
+            dgvSwimmers.Size = new Size(1140, 336);
             dgvSwimmers.TabIndex = 5;
             // 
             // colID
@@ -334,6 +340,44 @@
             colCoachingHours.HeaderText = "CoachingHours";
             colCoachingHours.MinimumWidth = 8;
             colCoachingHours.Name = "colCoachingHours";
+            // 
+            // lblSearch
+            // 
+            lblSearch.AutoSize = true;
+            lblSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSearch.Location = new Point(30, 228);
+            lblSearch.Name = "lblSearch";
+            lblSearch.Size = new Size(75, 28);
+            lblSearch.TabIndex = 5;
+            lblSearch.Text = "Search";
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(30, 268);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = "Search swimmer name";
+            txtSearch.Size = new Size(300, 34);
+            txtSearch.TabIndex = 6;
+            // 
+            // btnSearch
+            // 
+            btnSearch.BackColor = Color.DodgerBlue;
+            btnSearch.Cursor = Cursors.Hand;
+            btnSearch.FlatAppearance.BorderSize = 0;
+            btnSearch.FlatStyle = FlatStyle.Flat;
+            btnSearch.ForeColor = Color.White;
+            btnSearch.Location = new Point(370, 268);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(120, 35);
+            btnSearch.TabIndex = 7;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // colStatus
+            // 
+            colStatus.HeaderText = "Status";
+            colStatus.MinimumWidth = 8;
+            colStatus.Name = "colStatus";
             // 
             // FrmSwimmer
             // 
@@ -390,5 +434,9 @@
         private DataGridViewTextBoxColumn colCompetitionCategory;
         private DataGridViewTextBoxColumn colCompetitions;
         private DataGridViewTextBoxColumn colCoachingHours;
+        private TextBox txtSearch;
+        private Label lblSearch;
+        private Button btnSearch;
+        private DataGridViewTextBoxColumn colStatus;
     }
 }
