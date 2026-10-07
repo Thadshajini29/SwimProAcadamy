@@ -1,4 +1,4 @@
-﻿namespace SwimProAcadamy
+namespace SwimProAcadamy
 {
     partial class FrmSwimmer
     {
@@ -31,6 +31,9 @@
             pnlSwimmerHeader = new Panel();
             lblSwimmerTitle = new Label();
             pnlSwimmerInput = new Panel();
+            btnSearch = new Button();
+            txtSearch = new TextBox();
+            lblSearch = new Label();
             btnClear = new Button();
             btnDelete = new Button();
             btnUpdate = new Button();
@@ -55,9 +58,6 @@
             colCompetitionCategory = new DataGridViewTextBoxColumn();
             colCompetitions = new DataGridViewTextBoxColumn();
             colCoachingHours = new DataGridViewTextBoxColumn();
-            lblSearch = new Label();
-            txtSearch = new TextBox();
-            btnSearch = new Button();
             colStatus = new DataGridViewTextBoxColumn();
             pnlSwimmerHeader.SuspendLayout();
             pnlSwimmerInput.SuspendLayout();
@@ -117,6 +117,38 @@
             pnlSwimmerInput.TabIndex = 1;
             pnlSwimmerInput.Paint += pnlSwimmerInput_Paint;
             // 
+            // btnSearch
+            // 
+            btnSearch.BackColor = Color.DodgerBlue;
+            btnSearch.Cursor = Cursors.Hand;
+            btnSearch.FlatAppearance.BorderSize = 0;
+            btnSearch.FlatStyle = FlatStyle.Flat;
+            btnSearch.ForeColor = Color.White;
+            btnSearch.Location = new Point(370, 268);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(120, 35);
+            btnSearch.TabIndex = 11;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(30, 268);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = "Search swimmer name";
+            txtSearch.Size = new Size(300, 34);
+            txtSearch.TabIndex = 10;
+            // 
+            // lblSearch
+            // 
+            lblSearch.AutoSize = true;
+            lblSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSearch.Location = new Point(30, 228);
+            lblSearch.Name = "lblSearch";
+            lblSearch.Size = new Size(75, 28);
+            lblSearch.TabIndex = 5;
+            lblSearch.Text = "Search";
+            // 
             // btnClear
             // 
             btnClear.BackColor = Color.Gray;
@@ -126,9 +158,10 @@
             btnClear.Location = new Point(737, 181);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(130, 40);
-            btnClear.TabIndex = 4;
+            btnClear.TabIndex = 9;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
             // btnDelete
             // 
@@ -139,9 +172,10 @@
             btnDelete.Location = new Point(554, 181);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(130, 40);
-            btnDelete.TabIndex = 4;
+            btnDelete.TabIndex = 8;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click_1;
             // 
             // btnUpdate
             // 
@@ -152,7 +186,7 @@
             btnUpdate.Location = new Point(385, 181);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(130, 40);
-            btnUpdate.TabIndex = 4;
+            btnUpdate.TabIndex = 7;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
             // 
@@ -165,7 +199,7 @@
             btnAdd.Location = new Point(220, 181);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(130, 40);
-            btnAdd.TabIndex = 4;
+            btnAdd.TabIndex = 6;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = false;
             // 
@@ -187,7 +221,7 @@
             cmbTrainingPlan.Location = new Point(530, 45);
             cmbTrainingPlan.Name = "cmbTrainingPlan";
             cmbTrainingPlan.Size = new Size(230, 36);
-            cmbTrainingPlan.TabIndex = 3;
+            cmbTrainingPlan.TabIndex = 2;
             // 
             // nudCoachingHours
             // 
@@ -197,7 +231,7 @@
             nudCoachingHours.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
             nudCoachingHours.Name = "nudCoachingHours";
             nudCoachingHours.Size = new Size(150, 37);
-            nudCoachingHours.TabIndex = 2;
+            nudCoachingHours.TabIndex = 5;
             // 
             // nudCompetitions
             // 
@@ -206,7 +240,7 @@
             nudCompetitions.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             nudCompetitions.Name = "nudCompetitions";
             nudCompetitions.Size = new Size(150, 37);
-            nudCompetitions.TabIndex = 2;
+            nudCompetitions.TabIndex = 4;
             nudCompetitions.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // nudAge
@@ -216,7 +250,7 @@
             nudAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudAge.Name = "nudAge";
             nudAge.Size = new Size(165, 37);
-            nudAge.TabIndex = 2;
+            nudAge.TabIndex = 1;
             nudAge.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // txtName
@@ -227,7 +261,7 @@
             txtName.Name = "txtName";
             txtName.PlaceholderText = "Enter swimmer name";
             txtName.Size = new Size(300, 37);
-            txtName.TabIndex = 1;
+            txtName.TabIndex = 0;
             // 
             // lblAge
             // 
@@ -297,7 +331,7 @@
             dgvSwimmers.RowHeadersWidth = 62;
             dgvSwimmers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvSwimmers.Size = new Size(1140, 336);
-            dgvSwimmers.TabIndex = 5;
+            dgvSwimmers.TabIndex = 12;
             // 
             // colID
             // 
@@ -340,38 +374,6 @@
             colCoachingHours.HeaderText = "CoachingHours";
             colCoachingHours.MinimumWidth = 8;
             colCoachingHours.Name = "colCoachingHours";
-            // 
-            // lblSearch
-            // 
-            lblSearch.AutoSize = true;
-            lblSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSearch.Location = new Point(30, 228);
-            lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(75, 28);
-            lblSearch.TabIndex = 5;
-            lblSearch.Text = "Search";
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new Point(30, 268);
-            txtSearch.Name = "txtSearch";
-            txtSearch.PlaceholderText = "Search swimmer name";
-            txtSearch.Size = new Size(300, 34);
-            txtSearch.TabIndex = 6;
-            // 
-            // btnSearch
-            // 
-            btnSearch.BackColor = Color.DodgerBlue;
-            btnSearch.Cursor = Cursors.Hand;
-            btnSearch.FlatAppearance.BorderSize = 0;
-            btnSearch.FlatStyle = FlatStyle.Flat;
-            btnSearch.ForeColor = Color.White;
-            btnSearch.Location = new Point(370, 268);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(120, 35);
-            btnSearch.TabIndex = 7;
-            btnSearch.Text = "Search";
-            btnSearch.UseVisualStyleBackColor = false;
             // 
             // colStatus
             // 

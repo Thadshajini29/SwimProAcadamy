@@ -31,19 +31,22 @@
             pnlTrainingHeader = new Panel();
             lblTrainingTitle = new Label();
             pnlTrainingInput = new Panel();
-            lblPlanName = new Label();
+            btnClearPlan = new Button();
+            btnDeletePlan = new Button();
+            btnUpdatePlan = new Button();
+            btnAddPlan = new Button();
+            chkPlanActive = new CheckBox();
+            chkCompetitionAllowed = new CheckBox();
+            nudSessionsPerWeek = new NumericUpDown();
+            lblSessionsPerWeek = new Label();
+            nudMonthlyFee = new NumericUpDown();
             txtPlanName = new TextBox();
             lblMonthlyFee = new Label();
-            nudMonthlyFee = new NumericUpDown();
-            chkCompetitionAllowed = new CheckBox();
-            chkPlanActive = new CheckBox();
-            btnAddPlan = new Button();
-            btnUpdatePlan = new Button();
-            btnDeletePlan = new Button();
-            btnClearPlan = new Button();
+            lblPlanName = new Label();
             dgvTrainingPlans = new DataGridView();
             pnlTrainingHeader.SuspendLayout();
             pnlTrainingInput.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudSessionsPerWeek).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudMonthlyFee).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvTrainingPlans).BeginInit();
             SuspendLayout();
@@ -79,6 +82,8 @@
             pnlTrainingInput.Controls.Add(btnAddPlan);
             pnlTrainingInput.Controls.Add(chkPlanActive);
             pnlTrainingInput.Controls.Add(chkCompetitionAllowed);
+            pnlTrainingInput.Controls.Add(nudSessionsPerWeek);
+            pnlTrainingInput.Controls.Add(lblSessionsPerWeek);
             pnlTrainingInput.Controls.Add(nudMonthlyFee);
             pnlTrainingInput.Controls.Add(txtPlanName);
             pnlTrainingInput.Controls.Add(lblMonthlyFee);
@@ -87,116 +92,6 @@
             pnlTrainingInput.Name = "pnlTrainingInput";
             pnlTrainingInput.Size = new Size(1040, 230);
             pnlTrainingInput.TabIndex = 1;
-            // 
-            // lblPlanName
-            // 
-            lblPlanName.AutoSize = true;
-            lblPlanName.BackColor = Color.Transparent;
-            lblPlanName.ForeColor = Color.Black;
-            lblPlanName.Location = new Point(30, 20);
-            lblPlanName.Name = "lblPlanName";
-            lblPlanName.Size = new Size(106, 28);
-            lblPlanName.TabIndex = 0;
-            lblPlanName.Text = "Plan Name";
-            // 
-            // txtPlanName
-            // 
-            txtPlanName.BorderStyle = BorderStyle.FixedSingle;
-            txtPlanName.Location = new Point(30, 45);
-            txtPlanName.Name = "txtPlanName";
-            txtPlanName.PlaceholderText = "Enter training plan";
-            txtPlanName.Size = new Size(280, 34);
-            txtPlanName.TabIndex = 1;
-            // 
-            // lblMonthlyFee
-            // 
-            lblMonthlyFee.AutoSize = true;
-            lblMonthlyFee.BackColor = Color.Transparent;
-            lblMonthlyFee.ForeColor = Color.Black;
-            lblMonthlyFee.Location = new Point(340, 20);
-            lblMonthlyFee.Name = "lblMonthlyFee";
-            lblMonthlyFee.Size = new Size(121, 28);
-            lblMonthlyFee.TabIndex = 0;
-            lblMonthlyFee.Text = "Monthly Fee";
-            // 
-            // nudMonthlyFee
-            // 
-            nudMonthlyFee.DecimalPlaces = 2;
-            nudMonthlyFee.Increment = new decimal(new int[] { 100, 0, 0, 0 });
-            nudMonthlyFee.Location = new Point(340, 45);
-            nudMonthlyFee.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
-            nudMonthlyFee.Name = "nudMonthlyFee";
-            nudMonthlyFee.Size = new Size(180, 34);
-            nudMonthlyFee.TabIndex = 2;
-            // 
-            // chkCompetitionAllowed
-            // 
-            chkCompetitionAllowed.AutoSize = true;
-            chkCompetitionAllowed.Cursor = Cursors.Hand;
-            chkCompetitionAllowed.Location = new Point(550, 52);
-            chkCompetitionAllowed.Name = "chkCompetitionAllowed";
-            chkCompetitionAllowed.Size = new Size(224, 32);
-            chkCompetitionAllowed.TabIndex = 3;
-            chkCompetitionAllowed.Text = "Competition Allowed";
-            chkCompetitionAllowed.UseVisualStyleBackColor = true;
-            // 
-            // chkPlanActive
-            // 
-            chkPlanActive.AutoSize = true;
-            chkPlanActive.Checked = true;
-            chkPlanActive.CheckState = CheckState.Checked;
-            chkPlanActive.Cursor = Cursors.Hand;
-            chkPlanActive.Location = new Point(770, 52);
-            chkPlanActive.Name = "chkPlanActive";
-            chkPlanActive.Size = new Size(92, 32);
-            chkPlanActive.TabIndex = 3;
-            chkPlanActive.Text = "Active";
-            chkPlanActive.UseVisualStyleBackColor = true;
-            // 
-            // btnAddPlan
-            // 
-            btnAddPlan.BackColor = Color.DodgerBlue;
-            btnAddPlan.Cursor = Cursors.Hand;
-            btnAddPlan.FlatAppearance.BorderSize = 0;
-            btnAddPlan.FlatStyle = FlatStyle.Flat;
-            btnAddPlan.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAddPlan.ForeColor = Color.White;
-            btnAddPlan.Location = new Point(30, 120);
-            btnAddPlan.Name = "btnAddPlan";
-            btnAddPlan.Size = new Size(130, 40);
-            btnAddPlan.TabIndex = 4;
-            btnAddPlan.Text = "Add Plan";
-            btnAddPlan.UseVisualStyleBackColor = false;
-            // 
-            // btnUpdatePlan
-            // 
-            btnUpdatePlan.BackColor = Color.SteelBlue;
-            btnUpdatePlan.Cursor = Cursors.Hand;
-            btnUpdatePlan.FlatAppearance.BorderSize = 0;
-            btnUpdatePlan.FlatStyle = FlatStyle.Flat;
-            btnUpdatePlan.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnUpdatePlan.ForeColor = Color.White;
-            btnUpdatePlan.Location = new Point(175, 120);
-            btnUpdatePlan.Name = "btnUpdatePlan";
-            btnUpdatePlan.Size = new Size(130, 40);
-            btnUpdatePlan.TabIndex = 4;
-            btnUpdatePlan.Text = "Update";
-            btnUpdatePlan.UseVisualStyleBackColor = false;
-            // 
-            // btnDeletePlan
-            // 
-            btnDeletePlan.BackColor = Color.IndianRed;
-            btnDeletePlan.Cursor = Cursors.Hand;
-            btnDeletePlan.FlatAppearance.BorderSize = 0;
-            btnDeletePlan.FlatStyle = FlatStyle.Flat;
-            btnDeletePlan.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDeletePlan.ForeColor = Color.White;
-            btnDeletePlan.Location = new Point(320, 120);
-            btnDeletePlan.Name = "btnDeletePlan";
-            btnDeletePlan.Size = new Size(130, 40);
-            btnDeletePlan.TabIndex = 4;
-            btnDeletePlan.Text = "Delete";
-            btnDeletePlan.UseVisualStyleBackColor = false;
             // 
             // btnClearPlan
             // 
@@ -209,9 +104,143 @@
             btnClearPlan.Location = new Point(465, 120);
             btnClearPlan.Name = "btnClearPlan";
             btnClearPlan.Size = new Size(130, 40);
-            btnClearPlan.TabIndex = 4;
+            btnClearPlan.TabIndex = 8;
             btnClearPlan.Text = "Clear";
             btnClearPlan.UseVisualStyleBackColor = false;
+            btnClearPlan.Click += btnClearPlan_Click;
+            // 
+            // btnDeletePlan
+            // 
+            btnDeletePlan.BackColor = Color.IndianRed;
+            btnDeletePlan.Cursor = Cursors.Hand;
+            btnDeletePlan.FlatAppearance.BorderSize = 0;
+            btnDeletePlan.FlatStyle = FlatStyle.Flat;
+            btnDeletePlan.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDeletePlan.ForeColor = Color.White;
+            btnDeletePlan.Location = new Point(320, 120);
+            btnDeletePlan.Name = "btnDeletePlan";
+            btnDeletePlan.Size = new Size(130, 40);
+            btnDeletePlan.TabIndex = 7;
+            btnDeletePlan.Text = "Delete";
+            btnDeletePlan.UseVisualStyleBackColor = false;
+            btnDeletePlan.Click += btnDeletePlan_Click;
+            // 
+            // btnUpdatePlan
+            // 
+            btnUpdatePlan.BackColor = Color.SteelBlue;
+            btnUpdatePlan.Cursor = Cursors.Hand;
+            btnUpdatePlan.FlatAppearance.BorderSize = 0;
+            btnUpdatePlan.FlatStyle = FlatStyle.Flat;
+            btnUpdatePlan.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnUpdatePlan.ForeColor = Color.White;
+            btnUpdatePlan.Location = new Point(175, 120);
+            btnUpdatePlan.Name = "btnUpdatePlan";
+            btnUpdatePlan.Size = new Size(130, 40);
+            btnUpdatePlan.TabIndex = 6;
+            btnUpdatePlan.Text = "Update";
+            btnUpdatePlan.UseVisualStyleBackColor = false;
+            btnUpdatePlan.Click += btnUpdatePlan_Click;
+            // 
+            // btnAddPlan
+            // 
+            btnAddPlan.BackColor = Color.DodgerBlue;
+            btnAddPlan.Cursor = Cursors.Hand;
+            btnAddPlan.FlatAppearance.BorderSize = 0;
+            btnAddPlan.FlatStyle = FlatStyle.Flat;
+            btnAddPlan.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAddPlan.ForeColor = Color.White;
+            btnAddPlan.Location = new Point(30, 120);
+            btnAddPlan.Name = "btnAddPlan";
+            btnAddPlan.Size = new Size(130, 40);
+            btnAddPlan.TabIndex = 5;
+            btnAddPlan.Text = "Add Plan";
+            btnAddPlan.UseVisualStyleBackColor = false;
+            btnAddPlan.Click += btnAddPlan_Click;
+            // 
+            // chkPlanActive
+            // 
+            chkPlanActive.AutoSize = true;
+            chkPlanActive.Checked = true;
+            chkPlanActive.CheckState = CheckState.Checked;
+            chkPlanActive.Cursor = Cursors.Hand;
+            chkPlanActive.Location = new Point(936, 47);
+            chkPlanActive.Name = "chkPlanActive";
+            chkPlanActive.Size = new Size(92, 32);
+            chkPlanActive.TabIndex = 4;
+            chkPlanActive.Text = "Active";
+            chkPlanActive.UseVisualStyleBackColor = true;
+            // 
+            // chkCompetitionAllowed
+            // 
+            chkCompetitionAllowed.AutoSize = true;
+            chkCompetitionAllowed.Cursor = Cursors.Hand;
+            chkCompetitionAllowed.Location = new Point(718, 47);
+            chkCompetitionAllowed.Name = "chkCompetitionAllowed";
+            chkCompetitionAllowed.Size = new Size(224, 32);
+            chkCompetitionAllowed.TabIndex = 3;
+            chkCompetitionAllowed.Text = "Competition Allowed";
+            chkCompetitionAllowed.UseVisualStyleBackColor = true;
+            // 
+            // nudSessionsPerWeek
+            // 
+            nudSessionsPerWeek.Location = new Point(550, 45);
+            nudSessionsPerWeek.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
+            nudSessionsPerWeek.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudSessionsPerWeek.Name = "nudSessionsPerWeek";
+            nudSessionsPerWeek.Size = new Size(150, 34);
+            nudSessionsPerWeek.TabIndex = 2;
+            nudSessionsPerWeek.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // lblSessionsPerWeek
+            // 
+            lblSessionsPerWeek.AutoSize = true;
+            lblSessionsPerWeek.Location = new Point(550, 20);
+            lblSessionsPerWeek.Name = "lblSessionsPerWeek";
+            lblSessionsPerWeek.Size = new Size(172, 28);
+            lblSessionsPerWeek.TabIndex = 0;
+            lblSessionsPerWeek.Text = "Sessions per Week";
+            // 
+            // nudMonthlyFee
+            // 
+            nudMonthlyFee.DecimalPlaces = 2;
+            nudMonthlyFee.Increment = new decimal(new int[] { 100, 0, 0, 0 });
+            nudMonthlyFee.Location = new Point(340, 45);
+            nudMonthlyFee.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            nudMonthlyFee.Name = "nudMonthlyFee";
+            nudMonthlyFee.Size = new Size(180, 34);
+            nudMonthlyFee.TabIndex = 1;
+            // 
+            // txtPlanName
+            // 
+            txtPlanName.BorderStyle = BorderStyle.FixedSingle;
+            txtPlanName.Location = new Point(30, 45);
+            txtPlanName.Name = "txtPlanName";
+            txtPlanName.PlaceholderText = "Enter training plan";
+            txtPlanName.Size = new Size(280, 34);
+            txtPlanName.TabIndex = 0;
+            txtPlanName.TextChanged += txtPlanName_TextChanged;
+            // 
+            // lblMonthlyFee
+            // 
+            lblMonthlyFee.AutoSize = true;
+            lblMonthlyFee.BackColor = Color.Transparent;
+            lblMonthlyFee.ForeColor = Color.Black;
+            lblMonthlyFee.Location = new Point(340, 20);
+            lblMonthlyFee.Name = "lblMonthlyFee";
+            lblMonthlyFee.Size = new Size(151, 28);
+            lblMonthlyFee.TabIndex = 0;
+            lblMonthlyFee.Text = "Weekly Fee (Rs.)";
+            // 
+            // lblPlanName
+            // 
+            lblPlanName.AutoSize = true;
+            lblPlanName.BackColor = Color.Transparent;
+            lblPlanName.ForeColor = Color.Black;
+            lblPlanName.Location = new Point(30, 20);
+            lblPlanName.Name = "lblPlanName";
+            lblPlanName.Size = new Size(106, 28);
+            lblPlanName.TabIndex = 0;
+            lblPlanName.Text = "Plan Name";
             // 
             // dgvTrainingPlans
             // 
@@ -228,7 +257,8 @@
             dgvTrainingPlans.RowHeadersWidth = 62;
             dgvTrainingPlans.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTrainingPlans.Size = new Size(1040, 270);
-            dgvTrainingPlans.TabIndex = 2;
+            dgvTrainingPlans.TabIndex = 9;
+            dgvTrainingPlans.CellContentClick += dgvTrainingPlans_CellContentClick;
             // 
             // FrmTrainingPlans
             // 
@@ -245,10 +275,12 @@
             Name = "FrmTrainingPlans";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SwimPro Academy - Training Plans";
+            Load += FrmTrainingPlans_Load;
             pnlTrainingHeader.ResumeLayout(false);
             pnlTrainingHeader.PerformLayout();
             pnlTrainingInput.ResumeLayout(false);
             pnlTrainingInput.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudSessionsPerWeek).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudMonthlyFee).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvTrainingPlans).EndInit();
             ResumeLayout(false);
@@ -264,6 +296,8 @@
         private CheckBox chkPlanActive;
         private CheckBox chkCompetitionAllowed;
         private NumericUpDown nudMonthlyFee;
+        private NumericUpDown nudSessionsPerWeek;
+        private Label lblSessionsPerWeek;
         private Label lblMonthlyFee;
         private Button btnClearPlan;
         private Button btnDeletePlan;

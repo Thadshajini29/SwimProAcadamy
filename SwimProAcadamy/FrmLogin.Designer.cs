@@ -78,7 +78,7 @@
             chkShowPassword.Location = new Point(40, 335);
             chkShowPassword.Name = "chkShowPassword";
             chkShowPassword.Size = new Size(164, 29);
-            chkShowPassword.TabIndex = 8;
+            chkShowPassword.TabIndex = 2;
             chkShowPassword.Text = "Show password";
             chkShowPassword.UseVisualStyleBackColor = false;
             chkShowPassword.CheckedChanged += chkShowPassword_CheckedChanged;
@@ -105,7 +105,7 @@
             btnLogin.Location = new Point(40, 405);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(360, 48);
-            btnLogin.TabIndex = 1;
+            btnLogin.TabIndex = 5;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = false;
             // 
@@ -131,7 +131,7 @@
             lnkForgotPassword.Location = new Point(265, 365);
             lnkForgotPassword.Name = "lnkForgotPassword";
             lnkForgotPassword.Size = new Size(154, 25);
-            lnkForgotPassword.TabIndex = 6;
+            lnkForgotPassword.TabIndex = 4;
             lnkForgotPassword.TabStop = true;
             lnkForgotPassword.Text = "Forgot Password?";
             // 
@@ -144,7 +144,7 @@
             chkRemember.Location = new Point(40, 365);
             chkRemember.Name = "chkRemember";
             chkRemember.Size = new Size(154, 29);
-            chkRemember.TabIndex = 5;
+            chkRemember.TabIndex = 3;
             chkRemember.Text = "Remember me";
             chkRemember.UseVisualStyleBackColor = false;
             // 
@@ -157,7 +157,7 @@
             txtPassword.Name = "txtPassword";
             txtPassword.PlaceholderText = "Enter your password";
             txtPassword.Size = new Size(350, 37);
-            txtPassword.TabIndex = 4;
+            txtPassword.TabIndex = 1;
             txtPassword.UseSystemPasswordChar = true;
             // 
             // txtUsername
@@ -169,7 +169,7 @@
             txtUsername.Name = "txtUsername";
             txtUsername.PlaceholderText = "Enter your username or email";
             txtUsername.Size = new Size(350, 37);
-            txtUsername.TabIndex = 4;
+            txtUsername.TabIndex = 0;
             // 
             // lblPassword
             // 

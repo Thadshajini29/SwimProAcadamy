@@ -65,7 +65,7 @@
             pnlRegister.Controls.Add(lblFullName);
             pnlRegister.Controls.Add(lblRegisterTitle);
             pnlRegister.Controls.Add(picRegisterLogo);
-            pnlRegister.Location = new Point(250, 40);
+            pnlRegister.Location = new Point(323, 12);
             pnlRegister.Name = "pnlRegister";
             pnlRegister.Size = new Size(500, 570);
             pnlRegister.TabIndex = 0;
@@ -77,10 +77,10 @@
             lnkBackLogin.BackColor = Color.Transparent;
             lnkBackLogin.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lnkBackLogin.LinkColor = Color.DodgerBlue;
-            lnkBackLogin.Location = new Point(145, 540);
+            lnkBackLogin.Location = new Point(129, 520);
             lnkBackLogin.Name = "lnkBackLogin";
             lnkBackLogin.Size = new Size(262, 25);
-            lnkBackLogin.TabIndex = 5;
+            lnkBackLogin.TabIndex = 8;
             lnkBackLogin.TabStop = true;
             lnkBackLogin.Text = "Already have an account? Login";
             // 
@@ -92,10 +92,10 @@
             btnRegister.FlatStyle = FlatStyle.Flat;
             btnRegister.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRegister.ForeColor = Color.White;
-            btnRegister.Location = new Point(40, 490);
+            btnRegister.Location = new Point(40, 470);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(420, 42);
-            btnRegister.TabIndex = 4;
+            btnRegister.TabIndex = 7;
             btnRegister.Text = "Create Account";
             btnRegister.UseVisualStyleBackColor = false;
             // 
@@ -104,11 +104,11 @@
             txtConfirmPassword.BackColor = Color.White;
             txtConfirmPassword.BorderStyle = BorderStyle.FixedSingle;
             txtConfirmPassword.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtConfirmPassword.Location = new Point(40, 440);
+            txtConfirmPassword.Location = new Point(40, 428);
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.PlaceholderText = "Confirm password";
             txtConfirmPassword.Size = new Size(420, 37);
-            txtConfirmPassword.TabIndex = 3;
+            txtConfirmPassword.TabIndex = 4;
             txtConfirmPassword.UseSystemPasswordChar = true;
             // 
             // txtRegPassword
@@ -116,7 +116,7 @@
             txtRegPassword.BackColor = Color.White;
             txtRegPassword.BorderStyle = BorderStyle.FixedSingle;
             txtRegPassword.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtRegPassword.Location = new Point(40, 370);
+            txtRegPassword.Location = new Point(40, 358);
             txtRegPassword.Name = "txtRegPassword";
             txtRegPassword.PlaceholderText = "Enter password";
             txtRegPassword.Size = new Size(420, 37);
@@ -128,40 +128,40 @@
             txtEmail.BackColor = Color.White;
             txtEmail.BorderStyle = BorderStyle.FixedSingle;
             txtEmail.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.Location = new Point(40, 300);
+            txtEmail.Location = new Point(40, 288);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "Enter email";
             txtEmail.Size = new Size(420, 37);
-            txtEmail.TabIndex = 3;
+            txtEmail.TabIndex = 2;
             // 
             // txtRegUsername
             // 
             txtRegUsername.BackColor = Color.White;
             txtRegUsername.BorderStyle = BorderStyle.FixedSingle;
             txtRegUsername.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtRegUsername.Location = new Point(40, 230);
+            txtRegUsername.Location = new Point(40, 218);
             txtRegUsername.Name = "txtRegUsername";
             txtRegUsername.PlaceholderText = "Enter username";
             txtRegUsername.Size = new Size(420, 37);
-            txtRegUsername.TabIndex = 3;
+            txtRegUsername.TabIndex = 1;
             // 
             // txtFullName
             // 
             txtFullName.BackColor = Color.White;
             txtFullName.BorderStyle = BorderStyle.FixedSingle;
             txtFullName.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtFullName.Location = new Point(40, 160);
+            txtFullName.Location = new Point(40, 148);
             txtFullName.Name = "txtFullName";
             txtFullName.PlaceholderText = "Enter your full name";
             txtFullName.Size = new Size(420, 37);
-            txtFullName.TabIndex = 3;
+            txtFullName.TabIndex = 0;
             // 
             // lblConfirmPassword
             // 
             lblConfirmPassword.AutoSize = true;
             lblConfirmPassword.BackColor = Color.Transparent;
             lblConfirmPassword.ForeColor = Color.Black;
-            lblConfirmPassword.Location = new Point(40, 415);
+            lblConfirmPassword.Location = new Point(40, 405);
             lblConfirmPassword.Name = "lblConfirmPassword";
             lblConfirmPassword.Size = new Size(168, 28);
             lblConfirmPassword.TabIndex = 2;
@@ -172,7 +172,7 @@
             lblRegPassword.AutoSize = true;
             lblRegPassword.BackColor = Color.Transparent;
             lblRegPassword.ForeColor = Color.Black;
-            lblRegPassword.Location = new Point(40, 345);
+            lblRegPassword.Location = new Point(40, 335);
             lblRegPassword.Name = "lblRegPassword";
             lblRegPassword.Size = new Size(93, 28);
             lblRegPassword.TabIndex = 2;
@@ -183,7 +183,7 @@
             lblEmail.AutoSize = true;
             lblEmail.BackColor = Color.Transparent;
             lblEmail.ForeColor = Color.Black;
-            lblEmail.Location = new Point(40, 275);
+            lblEmail.Location = new Point(40, 265);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(59, 28);
             lblEmail.TabIndex = 2;
@@ -194,7 +194,7 @@
             lblRegUsername.AutoSize = true;
             lblRegUsername.BackColor = Color.Transparent;
             lblRegUsername.ForeColor = Color.Black;
-            lblRegUsername.Location = new Point(40, 205);
+            lblRegUsername.Location = new Point(40, 195);
             lblRegUsername.Name = "lblRegUsername";
             lblRegUsername.Size = new Size(99, 28);
             lblRegUsername.TabIndex = 2;
@@ -205,7 +205,7 @@
             lblFullName.AutoSize = true;
             lblFullName.BackColor = Color.Transparent;
             lblFullName.ForeColor = Color.Black;
-            lblFullName.Location = new Point(40, 135);
+            lblFullName.Location = new Point(40, 125);
             lblFullName.Name = "lblFullName";
             lblFullName.Size = new Size(100, 28);
             lblFullName.TabIndex = 2;
@@ -217,7 +217,7 @@
             lblRegisterTitle.BackColor = Color.Transparent;
             lblRegisterTitle.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblRegisterTitle.ForeColor = Color.MidnightBlue;
-            lblRegisterTitle.Location = new Point(70, 88);
+            lblRegisterTitle.Location = new Point(70, 78);
             lblRegisterTitle.Name = "lblRegisterTitle";
             lblRegisterTitle.Size = new Size(406, 54);
             lblRegisterTitle.TabIndex = 1;
@@ -241,7 +241,7 @@
             BackColor = Color.AliceBlue;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1076, 665);
+            ClientSize = new Size(1054, 644);
             Controls.Add(pnlRegister);
             Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedSingle;

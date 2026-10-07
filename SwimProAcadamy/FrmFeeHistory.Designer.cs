@@ -31,11 +31,11 @@
             pnlHistoryHeader = new Panel();
             lblHistoryTitle = new Label();
             pnlHistorySearch = new Panel();
-            lblSearch = new Label();
-            txtSearch = new TextBox();
-            btnSearch = new Button();
-            btnShowAll = new Button();
             btnPrint = new Button();
+            btnShowAll = new Button();
+            btnSearch = new Button();
+            txtSearch = new TextBox();
+            lblSearch = new Label();
             dgvFeeHistory = new DataGridView();
             pnlHistoryHeader.SuspendLayout();
             pnlHistorySearch.SuspendLayout();
@@ -77,40 +77,21 @@
             pnlHistorySearch.Size = new Size(1140, 110);
             pnlHistorySearch.TabIndex = 1;
             // 
-            // lblSearch
+            // btnPrint
             // 
-            lblSearch.AutoSize = true;
-            lblSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSearch.ForeColor = Color.MidnightBlue;
-            lblSearch.Location = new Point(30, 20);
-            lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(169, 28);
-            lblSearch.TabIndex = 0;
-            lblSearch.Text = "Search Swimmer";
-            // 
-            // txtSearch
-            // 
-            txtSearch.BorderStyle = BorderStyle.FixedSingle;
-            txtSearch.Location = new Point(30, 45);
-            txtSearch.Name = "txtSearch";
-            txtSearch.PlaceholderText = "Enter swimmer name";
-            txtSearch.Size = new Size(350, 34);
-            txtSearch.TabIndex = 1;
-            // 
-            // btnSearch
-            // 
-            btnSearch.BackColor = Color.DodgerBlue;
-            btnSearch.Cursor = Cursors.Hand;
-            btnSearch.FlatAppearance.BorderSize = 0;
-            btnSearch.FlatStyle = FlatStyle.Flat;
-            btnSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSearch.ForeColor = Color.White;
-            btnSearch.Location = new Point(400, 45);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(120, 35);
-            btnSearch.TabIndex = 2;
-            btnSearch.Text = "Search";
-            btnSearch.UseVisualStyleBackColor = false;
+            btnPrint.BackColor = Color.DimGray;
+            btnPrint.Cursor = Cursors.Hand;
+            btnPrint.FlatAppearance.BorderSize = 0;
+            btnPrint.FlatStyle = FlatStyle.Flat;
+            btnPrint.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPrint.ForeColor = Color.White;
+            btnPrint.Location = new Point(990, 45);
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new Size(120, 35);
+            btnPrint.TabIndex = 3;
+            btnPrint.Text = "Print";
+            btnPrint.UseVisualStyleBackColor = false;
+            btnPrint.Click += btnPrint_Click;
             // 
             // btnShowAll
             // 
@@ -126,21 +107,43 @@
             btnShowAll.TabIndex = 2;
             btnShowAll.Text = "Show All";
             btnShowAll.UseVisualStyleBackColor = false;
+            btnShowAll.Click += btnShowAll_Click;
             // 
-            // btnPrint
+            // btnSearch
             // 
-            btnPrint.BackColor = Color.DimGray;
-            btnPrint.Cursor = Cursors.Hand;
-            btnPrint.FlatAppearance.BorderSize = 0;
-            btnPrint.FlatStyle = FlatStyle.Flat;
-            btnPrint.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnPrint.ForeColor = Color.White;
-            btnPrint.Location = new Point(990, 45);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(120, 35);
-            btnPrint.TabIndex = 2;
-            btnPrint.Text = "Print";
-            btnPrint.UseVisualStyleBackColor = false;
+            btnSearch.BackColor = Color.DodgerBlue;
+            btnSearch.Cursor = Cursors.Hand;
+            btnSearch.FlatAppearance.BorderSize = 0;
+            btnSearch.FlatStyle = FlatStyle.Flat;
+            btnSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSearch.ForeColor = Color.White;
+            btnSearch.Location = new Point(400, 45);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(120, 35);
+            btnSearch.TabIndex = 1;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.BorderStyle = BorderStyle.FixedSingle;
+            txtSearch.Location = new Point(30, 45);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = "Enter swimmer name";
+            txtSearch.Size = new Size(350, 34);
+            txtSearch.TabIndex = 0;
+            // 
+            // lblSearch
+            // 
+            lblSearch.AutoSize = true;
+            lblSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSearch.ForeColor = Color.MidnightBlue;
+            lblSearch.Location = new Point(30, 20);
+            lblSearch.Name = "lblSearch";
+            lblSearch.Size = new Size(169, 28);
+            lblSearch.TabIndex = 0;
+            lblSearch.Text = "Search Swimmer";
             // 
             // dgvFeeHistory
             // 
@@ -157,7 +160,8 @@
             dgvFeeHistory.RowHeadersWidth = 62;
             dgvFeeHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvFeeHistory.Size = new Size(1140, 390);
-            dgvFeeHistory.TabIndex = 2;
+            dgvFeeHistory.TabIndex = 4;
+            dgvFeeHistory.CellContentClick += dgvFeeHistory_CellContentClick;
             // 
             // FrmFeeHistory
             // 

@@ -1,4 +1,4 @@
-﻿namespace SwimProAcadamy
+namespace SwimProAcadamy
 {
     partial class FrmFeeCalculator
     {
@@ -46,14 +46,14 @@
             lblSelectedPlan = new Label();
             lblSelectSwimmer = new Label();
             pnlCostBreakdown = new Panel();
+            btnClear = new Button();
+            btnSaveFee = new Button();
             btnCalculate = new Button();
             lblTotalCost = new Label();
             lblCoachingCost = new Label();
             lblCompetitionCost = new Label();
             lblTrainingCost = new Label();
             lblCostTitle = new Label();
-            btnSaveFee = new Button();
-            btnClear = new Button();
             pnlFeeHeader.SuspendLayout();
             pnlSwimmerDetails.SuspendLayout();
             pnlCostBreakdown.SuspendLayout();
@@ -132,7 +132,7 @@
             txtCompetitionCount.Name = "txtCompetitionCount";
             txtCompetitionCount.ReadOnly = true;
             txtCompetitionCount.Size = new Size(210, 34);
-            txtCompetitionCount.TabIndex = 2;
+            txtCompetitionCount.TabIndex = 1;
             // 
             // txtSelectedCategory
             // 
@@ -162,7 +162,7 @@
             cmbSwimmer.Location = new Point(30, 50);
             cmbSwimmer.Name = "cmbSwimmer";
             cmbSwimmer.Size = new Size(470, 38);
-            cmbSwimmer.TabIndex = 1;
+            cmbSwimmer.TabIndex = 0;
             // 
             // lblSelectedAge
             // 
@@ -264,6 +264,36 @@
             pnlCostBreakdown.TabIndex = 2;
             pnlCostBreakdown.Paint += pnlCostBreakdown_Paint;
             // 
+            // btnClear
+            // 
+            btnClear.BackColor = Color.Gray;
+            btnClear.Cursor = Cursors.Hand;
+            btnClear.FlatAppearance.BorderSize = 0;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(185, 425);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(140, 45);
+            btnClear.TabIndex = 5;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = false;
+            // 
+            // btnSaveFee
+            // 
+            btnSaveFee.BackColor = Color.SteelBlue;
+            btnSaveFee.Cursor = Cursors.Hand;
+            btnSaveFee.FlatAppearance.BorderSize = 0;
+            btnSaveFee.FlatStyle = FlatStyle.Flat;
+            btnSaveFee.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSaveFee.ForeColor = Color.White;
+            btnSaveFee.Location = new Point(30, 425);
+            btnSaveFee.Name = "btnSaveFee";
+            btnSaveFee.Size = new Size(140, 45);
+            btnSaveFee.TabIndex = 4;
+            btnSaveFee.Text = "Save Fee";
+            btnSaveFee.UseVisualStyleBackColor = false;
+            // 
             // btnCalculate
             // 
             btnCalculate.BackColor = Color.DodgerBlue;
@@ -275,7 +305,7 @@
             btnCalculate.Location = new Point(30, 360);
             btnCalculate.Name = "btnCalculate";
             btnCalculate.Size = new Size(300, 45);
-            btnCalculate.TabIndex = 2;
+            btnCalculate.TabIndex = 3;
             btnCalculate.Text = "Calculate Monthly Fee";
             btnCalculate.UseVisualStyleBackColor = false;
             // 
@@ -334,36 +364,6 @@
             lblCostTitle.TabIndex = 0;
             lblCostTitle.Text = "Monthly Cost Breakdown";
             // 
-            // btnSaveFee
-            // 
-            btnSaveFee.BackColor = Color.SteelBlue;
-            btnSaveFee.Cursor = Cursors.Hand;
-            btnSaveFee.FlatAppearance.BorderSize = 0;
-            btnSaveFee.FlatStyle = FlatStyle.Flat;
-            btnSaveFee.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSaveFee.ForeColor = Color.White;
-            btnSaveFee.Location = new Point(30, 425);
-            btnSaveFee.Name = "btnSaveFee";
-            btnSaveFee.Size = new Size(140, 45);
-            btnSaveFee.TabIndex = 3;
-            btnSaveFee.Text = "Save Fee";
-            btnSaveFee.UseVisualStyleBackColor = false;
-            // 
-            // btnClear
-            // 
-            btnClear.BackColor = Color.Gray;
-            btnClear.Cursor = Cursors.Hand;
-            btnClear.FlatAppearance.BorderSize = 0;
-            btnClear.FlatStyle = FlatStyle.Flat;
-            btnClear.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnClear.ForeColor = Color.White;
-            btnClear.Location = new Point(185, 425);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(140, 45);
-            btnClear.TabIndex = 3;
-            btnClear.Text = "Clear";
-            btnClear.UseVisualStyleBackColor = false;
-            // 
             // FrmFeeCalculator
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
@@ -412,6 +412,8 @@
         private Label lblTrainingCost;
         private Label lblCostTitle;
         private Button btnCalculate;
+        private Button btnSaveFee;
+        private Button btnClear;
         private Label lblTotalCost;
         private Label lblCoachingCost;
     }

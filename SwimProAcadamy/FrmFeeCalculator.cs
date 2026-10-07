@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SwimProAcadamy.DAL;
+using SwimProAcadamy.Models;
 
 namespace SwimProAcadamy
 {
@@ -9,46 +11,37 @@ namespace SwimProAcadamy
     {
         private int selectedSwimmerId;
         private bool feeCalculated;
-        private readonly Button btnSaveFee = new()
-        {
-            Text = "Save Fee",
-            Width = 150,
-            Height = 45,
-            Left = 345,
-            Top = 360,
-            BackColor = Color.MidnightBlue,
-            ForeColor = Color.White,
-            FlatStyle = FlatStyle.Flat
-        };
-        private readonly Button btnClear = new()
-        {
-            Text = "Clear",
-            Width = 150,
-            Height = 45,
-            Left = 30,
-            Top = 420,
-            BackColor = Color.Gray,
-            ForeColor = Color.White,
-            FlatStyle = FlatStyle.Flat
-        };
+        private decimal selectedTrainingFee;
+        private int? selectedMinimumAge;
+        private int? selectedMaximumAge;
+        private bool selectedCompetitionAllowed;
         public FrmFeeCalculator()
         {
             InitializeComponent();
             Load += FrmFeeCalculator_Load;
             cmbSwimmer.SelectedIndexChanged += cmbSwimmer_SelectedIndexChanged;
             btnCalculate.Click += btnCalculate_Click;
-            pnlCostBreakdown.Controls.Add(btnSaveFee);
-            pnlCostBreakdown.Controls.Add(btnClear);
             btnSaveFee.Click += btnSaveFee_Click;
             btnClear.Click += (s, e) => ClearCalculator();
         }
 
         private void FrmFeeCalculator_Load(object? sender, EventArgs e)
         {
+            if (!UserSession.IsAdmin() && !UserSession.IsManager() && !UserSession.IsStaff() && !UserSession.IsStudent())
+            {
+                MessageBox.Show("You do not have permission to access this feature.", "Access Denied", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
+                return;
+            }
             try
             {
-                using MySqlConnection connection = new Database().GetConnection();
-                using MySqlDataAdapter adapter = new("SELECT id, name FROM swimmers ORDER BY name", connection);
+                using MySqlConnection connection = DatabaseHelper.GetConnection();
+                string swimmersSql = UserSession.IsStudent()
+                    ? "SELECT id, name FROM swimmers WHERE is_active = 1 AND user_id = @userId ORDER BY name"
+                    : "SELECT id, name FROM swimmers WHERE is_active = 1 ORDER BY name";
+                using MySqlDataAdapter adapter = new(swimmersSql, connection);
+                if (UserSession.IsStudent()) adapter.SelectCommand.Parameters.AddWithValue("@userId", UserSession.UserId);
                 DataTable table = new();
                 adapter.Fill(table);
                 cmbSwimmer.DataSource = table;
@@ -58,28 +51,38 @@ namespace SwimProAcadamy
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to load swimmers. " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Unable to load swimmers. " + ex.Message, "Database Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void cmbSwimmer_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (cmbSwimmer.SelectedValue == null || cmbSwimmer.SelectedValue is DataRowView) return;
-            int id = Convert.ToInt32(cmbSwimmer.SelectedValue);
+            int swimmerId = Convert.ToInt32(cmbSwimmer.SelectedValue);
             try
             {
-                using MySqlConnection connection = new Database().GetConnection();
+                using MySqlConnection connection = DatabaseHelper.GetConnection();
                 connection.Open();
-                using MySqlCommand command = new("SELECT id, training_plan, age, competition_category, competitions," +
-                    " coaching_hours FROM swimmers WHERE id=@id", connection);
+                using MySqlCommand command = new(@"SELECT s.id, s.age, s.competitions, s.coaching_hours,
+                    tp.plan_name, tp.weekly_fee, tp.competition_allowed, cc.category_name, cc.min_age, cc.max_age
+                    FROM swimmers s
+                    INNER JOIN training_plans tp ON s.training_plan_id = tp.id
+                    LEFT JOIN competition_categories cc ON s.competition_category_id = cc.id
+                    WHERE s.id = @id", connection);
 
-                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@id", swimmerId);
                 using MySqlDataReader reader = command.ExecuteReader();
                 if (!reader.Read()) return;
                 selectedSwimmerId = reader.GetInt32("id");
-                txtSelectedPlan.Text = reader.GetString("training_plan");
+                txtSelectedPlan.Text = reader.GetString("plan_name");
+                selectedTrainingFee = reader.GetDecimal("weekly_fee") * 4m;
+                selectedCompetitionAllowed = reader.GetBoolean("competition_allowed");
                 txtSelectedAge.Text = reader.GetInt32("age").ToString();
-                txtSelectedCategory.Text = reader.GetString("competition_category");
+                txtSelectedCategory.Text = reader.IsDBNull(reader.GetOrdinal("category_name")) ? 
+                    "Not selected" : reader.GetString("category_name");
+                selectedMinimumAge = reader.IsDBNull(reader.GetOrdinal("min_age")) ? null : reader.GetInt32("min_age");
+                selectedMaximumAge = reader.IsDBNull(reader.GetOrdinal("max_age")) ? null : reader.GetInt32("max_age");
                 txtCompetitionCount.Text = reader.GetInt32("competitions").ToString();
                 txtCoachingHours.Text = reader.GetDecimal("coaching_hours").ToString("0.##");
                 feeCalculated = false;
@@ -104,7 +107,7 @@ namespace SwimProAcadamy
             if (!int.TryParse(txtCompetitionCount.Text, out int competitions) || competitions < 0 ||
                 !decimal.TryParse(txtCoachingHours.Text, out decimal hours) || hours < 0)
             {
-                MessageBox.Show("Competition count and coaching hours must be valid positive numbers.",
+                MessageBox.Show("Competition count and coaching hours must be valid non-negative numbers.",
                     "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -114,14 +117,16 @@ namespace SwimProAcadamy
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (competitions > 0 && !SwimProRules.IsCompetitionAllowed(txtSelectedPlan.Text))
+            if (competitions > 0 && !selectedCompetitionAllowed)
             {
                 MessageBox.Show("Beginner swimmers cannot enter competitions.", "Validation",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            // An age/category mismatch is displayed as a status message. It does
+            // not prevent calculation of the compulsory monthly training fee.
 
-            decimal training = SwimProRules.GetTrainingFee(txtSelectedPlan.Text);
+            decimal training = selectedTrainingFee;
             decimal competition = competitions * SwimProRules.CompetitionFee;
             decimal coaching = hours * SwimProRules.CoachingFee;
             decimal total = training + competition + coaching;
@@ -134,12 +139,23 @@ namespace SwimProAcadamy
 
         private void ShowAgeCategoryStatus()
         {
-            bool valid = int.TryParse
-                (txtSelectedAge.Text, out int age) && SwimProRules.AgeMatchesCategory(age, txtSelectedCategory.Text);
+            if (!selectedMinimumAge.HasValue || !selectedMaximumAge.HasValue)
+            {
+                lblValidationResult.Text = "No competition category has been selected.";
+                lblValidationResult.ForeColor = Color.Firebrick;
+                return;
+            }
+
+            bool valid = IsAgeCategoryValid();
             lblValidationResult.Text = valid ? "Age matches the selected competition category."
                 : "Age does NOT match the selected competition category.";
             lblValidationResult.ForeColor = valid ? Color.ForestGreen : Color.Firebrick;
         }
+
+        private bool IsAgeCategoryValid() =>
+            selectedMinimumAge.HasValue && selectedMaximumAge.HasValue &&
+            int.TryParse(txtSelectedAge.Text, out int age) &&
+            age >= selectedMinimumAge.Value && age <= selectedMaximumAge.Value;
         private void btnSaveFee_Click(object? sender, EventArgs e)
         {
             if (selectedSwimmerId == 0 || !feeCalculated)
@@ -147,26 +163,32 @@ namespace SwimProAcadamy
                 MessageBox.Show("Calculate the fee before saving it.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            if (UserSession.IsStudent())
+            {
+                MessageBox.Show("Students can view their fees but cannot save fee calculations.", "Permission Denied", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
             try
             {
-                decimal training = SwimProRules.GetTrainingFee(txtSelectedPlan.Text);
+                decimal training = selectedTrainingFee;
                 int competitions = int.Parse(txtCompetitionCount.Text);
                 decimal hours = decimal.Parse(txtCoachingHours.Text);
                 decimal competition = competitions * SwimProRules.CompetitionFee;
                 decimal coaching = hours * SwimProRules.CoachingFee;
+                Fee fee = new Fee
+                {
+                    SwimmerId = selectedSwimmerId,
+                    TrainingFee = training,
+                    CompetitionFee = competition,
+                    CoachingFee = coaching,
+                    TotalFee = training + competition + coaching,
+                    FeeMonth = DateTime.Today,
+                    CreatedBy = UserSession.UserId
+                };
 
-
-                using MySqlConnection c = new Database().GetConnection();
-                c.Open();
-                using MySqlCommand cmd = new("INSERT INTO fees(swimmer_id,training_fee,competition_fee,coaching_fee,total_fee)" +
-                    " VALUES(@id,@training,@competition,@coaching,@total)", c);
-                cmd.Parameters.AddWithValue("@id", selectedSwimmerId);
-
-                cmd.Parameters.AddWithValue("@training", training);
-                cmd.Parameters.AddWithValue("@competition", competition);
-                cmd.Parameters.AddWithValue("@coaching", coaching);
-                cmd.Parameters.AddWithValue("@total", training + competition + coaching);
-                cmd.ExecuteNonQuery();
+                new FeeDAL().SaveFee(fee);
+                AuditLogDAL.Log("CALCULATE", "Fee Calculator", $"Calculated monthly fee for swimmer ID {selectedSwimmerId}.");
                 MessageBox.Show("Fee saved successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -180,6 +202,10 @@ namespace SwimProAcadamy
         {
             selectedSwimmerId = 0;
             feeCalculated = false;
+            selectedTrainingFee = 0;
+            selectedMinimumAge = null;
+            selectedMaximumAge = null;
+            selectedCompetitionAllowed = false;
             cmbSwimmer.SelectedIndex = -1;
             txtSelectedPlan.Clear();
             txtSelectedAge.Clear();

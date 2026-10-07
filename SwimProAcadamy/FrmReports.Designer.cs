@@ -31,14 +31,14 @@
             pnlReportsHeader = new Panel();
             lblReportsTitle = new Label();
             pnlReportFilters = new Panel();
-            lblReportType = new Label();
-            cmbReportType = new ComboBox();
-            lblFromDate = new Label();
-            dtpFromDate = new DateTimePicker();
-            lblToDate = new Label();
-            dtpToDate = new DateTimePicker();
-            btnGenerateReport = new Button();
             btnExport = new Button();
+            btnGenerateReport = new Button();
+            dtpToDate = new DateTimePicker();
+            dtpFromDate = new DateTimePicker();
+            cmbReportType = new ComboBox();
+            lblToDate = new Label();
+            lblFromDate = new Label();
+            lblReportType = new Label();
             dgvReports = new DataGridView();
             colID = new DataGridViewTextBoxColumn();
             colSwimmerName = new DataGridViewTextBoxColumn();
@@ -91,67 +91,21 @@
             pnlReportFilters.Size = new Size(1140, 150);
             pnlReportFilters.TabIndex = 5;
             // 
-            // lblReportType
+            // btnExport
             // 
-            lblReportType.AutoSize = true;
-            lblReportType.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblReportType.ForeColor = Color.MidnightBlue;
-            lblReportType.Location = new Point(30, 20);
-            lblReportType.Name = "lblReportType";
-            lblReportType.Size = new Size(128, 28);
-            lblReportType.TabIndex = 0;
-            lblReportType.Text = "Report Type";
-            // 
-            // cmbReportType
-            // 
-            cmbReportType.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbReportType.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbReportType.FormattingEnabled = true;
-            cmbReportType.Items.AddRange(new object[] { "All Swimmers", "Monthly Fees", "Competition Entries", "Private Coaching", "Training Plans" });
-            cmbReportType.Location = new Point(30, 45);
-            cmbReportType.Name = "cmbReportType";
-            cmbReportType.Size = new Size(280, 36);
-            cmbReportType.TabIndex = 1;
-            // 
-            // lblFromDate
-            // 
-            lblFromDate.AutoSize = true;
-            lblFromDate.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFromDate.ForeColor = Color.MidnightBlue;
-            lblFromDate.Location = new Point(340, 20);
-            lblFromDate.Name = "lblFromDate";
-            lblFromDate.Size = new Size(111, 28);
-            lblFromDate.TabIndex = 0;
-            lblFromDate.Text = "From Date";
-            // 
-            // dtpFromDate
-            // 
-            dtpFromDate.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dtpFromDate.Format = DateTimePickerFormat.Short;
-            dtpFromDate.Location = new Point(340, 45);
-            dtpFromDate.Name = "dtpFromDate";
-            dtpFromDate.Size = new Size(180, 34);
-            dtpFromDate.TabIndex = 2;
-            // 
-            // lblToDate
-            // 
-            lblToDate.AutoSize = true;
-            lblToDate.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblToDate.ForeColor = Color.MidnightBlue;
-            lblToDate.Location = new Point(540, 20);
-            lblToDate.Name = "lblToDate";
-            lblToDate.Size = new Size(85, 28);
-            lblToDate.TabIndex = 0;
-            lblToDate.Text = "To Date";
-            // 
-            // dtpToDate
-            // 
-            dtpToDate.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dtpToDate.Format = DateTimePickerFormat.Short;
-            dtpToDate.Location = new Point(540, 45);
-            dtpToDate.Name = "dtpToDate";
-            dtpToDate.Size = new Size(180, 34);
-            dtpToDate.TabIndex = 2;
+            btnExport.BackColor = Color.SteelBlue;
+            btnExport.Cursor = Cursors.Hand;
+            btnExport.FlatAppearance.BorderSize = 0;
+            btnExport.FlatStyle = FlatStyle.Flat;
+            btnExport.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnExport.ForeColor = Color.White;
+            btnExport.Location = new Point(950, 43);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(120, 40);
+            btnExport.TabIndex = 4;
+            btnExport.Text = "Export";
+            btnExport.UseVisualStyleBackColor = false;
+            btnExport.Click += btnExport_Click;
             // 
             // btnGenerateReport
             // 
@@ -167,21 +121,70 @@
             btnGenerateReport.TabIndex = 3;
             btnGenerateReport.Text = "Generate Report";
             btnGenerateReport.UseVisualStyleBackColor = false;
+            btnGenerateReport.Click += btnGenerateReport_Click;
             // 
-            // btnExport
+            // dtpToDate
             // 
-            btnExport.BackColor = Color.SteelBlue;
-            btnExport.Cursor = Cursors.Hand;
-            btnExport.FlatAppearance.BorderSize = 0;
-            btnExport.FlatStyle = FlatStyle.Flat;
-            btnExport.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnExport.ForeColor = Color.White;
-            btnExport.Location = new Point(950, 43);
-            btnExport.Name = "btnExport";
-            btnExport.Size = new Size(120, 40);
-            btnExport.TabIndex = 3;
-            btnExport.Text = "Export";
-            btnExport.UseVisualStyleBackColor = false;
+            dtpToDate.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpToDate.Format = DateTimePickerFormat.Short;
+            dtpToDate.Location = new Point(540, 45);
+            dtpToDate.Name = "dtpToDate";
+            dtpToDate.Size = new Size(180, 34);
+            dtpToDate.TabIndex = 2;
+            // 
+            // dtpFromDate
+            // 
+            dtpFromDate.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpFromDate.Format = DateTimePickerFormat.Short;
+            dtpFromDate.Location = new Point(340, 45);
+            dtpFromDate.Name = "dtpFromDate";
+            dtpFromDate.Size = new Size(180, 34);
+            dtpFromDate.TabIndex = 1;
+            dtpFromDate.ValueChanged += dtpFromDate_ValueChanged;
+            // 
+            // cmbReportType
+            // 
+            cmbReportType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbReportType.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cmbReportType.FormattingEnabled = true;
+            cmbReportType.Items.AddRange(new object[] { "All Swimmers", "Monthly Fees", "Competition Entries", "Private Coaching", "Training Plans" });
+            cmbReportType.Location = new Point(30, 45);
+            cmbReportType.Name = "cmbReportType";
+            cmbReportType.Size = new Size(280, 36);
+            cmbReportType.TabIndex = 0;
+            // 
+            // lblToDate
+            // 
+            lblToDate.AutoSize = true;
+            lblToDate.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblToDate.ForeColor = Color.MidnightBlue;
+            lblToDate.Location = new Point(540, 20);
+            lblToDate.Name = "lblToDate";
+            lblToDate.Size = new Size(85, 28);
+            lblToDate.TabIndex = 0;
+            lblToDate.Text = "To Date";
+            // 
+            // lblFromDate
+            // 
+            lblFromDate.AutoSize = true;
+            lblFromDate.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFromDate.ForeColor = Color.MidnightBlue;
+            lblFromDate.Location = new Point(340, 20);
+            lblFromDate.Name = "lblFromDate";
+            lblFromDate.Size = new Size(111, 28);
+            lblFromDate.TabIndex = 0;
+            lblFromDate.Text = "From Date";
+            // 
+            // lblReportType
+            // 
+            lblReportType.AutoSize = true;
+            lblReportType.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblReportType.ForeColor = Color.MidnightBlue;
+            lblReportType.Location = new Point(30, 20);
+            lblReportType.Name = "lblReportType";
+            lblReportType.Size = new Size(128, 28);
+            lblReportType.TabIndex = 0;
+            lblReportType.Text = "Report Type";
             // 
             // dgvReports
             // 
@@ -199,7 +202,7 @@
             dgvReports.RowHeadersWidth = 62;
             dgvReports.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvReports.Size = new Size(1140, 350);
-            dgvReports.TabIndex = 6;
+            dgvReports.TabIndex = 5;
             // 
             // colID
             // 

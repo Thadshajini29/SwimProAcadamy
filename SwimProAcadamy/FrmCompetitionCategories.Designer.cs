@@ -31,22 +31,22 @@
             pnlCategoryHeader = new Panel();
             lblCategoryTitle = new Label();
             pnlCategoryInput = new Panel();
-            lblCategoryName = new Label();
-            txtCategoryName = new TextBox();
-            lblMinAge = new Label();
-            nudMinAge = new NumericUpDown();
-            lblMaxAge = new Label();
-            nudMaxAge = new NumericUpDown();
-            chkCategoryActive = new CheckBox();
-            btnAddCategory = new Button();
-            btnUpdateCategory = new Button();
-            btnDeleteCategory = new Button();
             btnClearCategory = new Button();
+            btnDeleteCategory = new Button();
+            btnUpdateCategory = new Button();
+            btnAddCategory = new Button();
+            chkCategoryActive = new CheckBox();
+            nudMaxAge = new NumericUpDown();
+            nudMinAge = new NumericUpDown();
+            txtCategoryName = new TextBox();
+            lblMaxAge = new Label();
+            lblMinAge = new Label();
+            lblCategoryName = new Label();
             dgvCategories = new DataGridView();
             pnlCategoryHeader.SuspendLayout();
             pnlCategoryInput.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudMinAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudMaxAge).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudMinAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCategories).BeginInit();
             SuspendLayout();
             // 
@@ -91,78 +91,53 @@
             pnlCategoryInput.Size = new Size(1040, 230);
             pnlCategoryInput.TabIndex = 1;
             // 
-            // lblCategoryName
+            // btnClearCategory
             // 
-            lblCategoryName.AutoSize = true;
-            lblCategoryName.BackColor = Color.Transparent;
-            lblCategoryName.ForeColor = Color.Black;
-            lblCategoryName.Location = new Point(30, 20);
-            lblCategoryName.Name = "lblCategoryName";
-            lblCategoryName.Size = new Size(149, 28);
-            lblCategoryName.TabIndex = 0;
-            lblCategoryName.Text = "Category Name";
+            btnClearCategory.BackColor = Color.Gray;
+            btnClearCategory.Cursor = Cursors.Hand;
+            btnClearCategory.FlatAppearance.BorderSize = 0;
+            btnClearCategory.FlatStyle = FlatStyle.Flat;
+            btnClearCategory.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClearCategory.ForeColor = Color.White;
+            btnClearCategory.Location = new Point(530, 120);
+            btnClearCategory.Name = "btnClearCategory";
+            btnClearCategory.Size = new Size(130, 40);
+            btnClearCategory.TabIndex = 7;
+            btnClearCategory.Text = "Clear";
+            btnClearCategory.UseVisualStyleBackColor = false;
+            btnClearCategory.Click += btnClearCategory_Click;
             // 
-            // txtCategoryName
+            // btnDeleteCategory
             // 
-            txtCategoryName.BorderStyle = BorderStyle.FixedSingle;
-            txtCategoryName.Location = new Point(30, 45);
-            txtCategoryName.Name = "txtCategoryName";
-            txtCategoryName.PlaceholderText = "Enter category name";
-            txtCategoryName.Size = new Size(300, 34);
-            txtCategoryName.TabIndex = 1;
+            btnDeleteCategory.BackColor = Color.IndianRed;
+            btnDeleteCategory.Cursor = Cursors.Hand;
+            btnDeleteCategory.FlatAppearance.BorderSize = 0;
+            btnDeleteCategory.FlatStyle = FlatStyle.Flat;
+            btnDeleteCategory.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDeleteCategory.ForeColor = Color.White;
+            btnDeleteCategory.Location = new Point(377, 120);
+            btnDeleteCategory.Name = "btnDeleteCategory";
+            btnDeleteCategory.Size = new Size(130, 40);
+            btnDeleteCategory.TabIndex = 6;
+            btnDeleteCategory.Text = "Delete";
+            btnDeleteCategory.UseVisualStyleBackColor = false;
+            btnDeleteCategory.Click += btnDeleteCategory_Click;
             // 
-            // lblMinAge
+            // btnUpdateCategory
             // 
-            lblMinAge.AutoSize = true;
-            lblMinAge.BackColor = Color.Transparent;
-            lblMinAge.ForeColor = Color.Black;
-            lblMinAge.Location = new Point(360, 20);
-            lblMinAge.Name = "lblMinAge";
-            lblMinAge.Size = new Size(136, 28);
-            lblMinAge.TabIndex = 0;
-            lblMinAge.Text = "Minimum Age";
-            // 
-            // nudMinAge
-            // 
-            nudMinAge.Location = new Point(396, 50);
-            nudMinAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            nudMinAge.Name = "nudMinAge";
-            nudMinAge.Size = new Size(154, 34);
-            nudMinAge.TabIndex = 2;
-            nudMinAge.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // lblMaxAge
-            // 
-            lblMaxAge.AutoSize = true;
-            lblMaxAge.BackColor = Color.Transparent;
-            lblMaxAge.ForeColor = Color.Black;
-            lblMaxAge.Location = new Point(530, 20);
-            lblMaxAge.Name = "lblMaxAge";
-            lblMaxAge.Size = new Size(139, 28);
-            lblMaxAge.TabIndex = 0;
-            lblMaxAge.Text = "Maximum Age";
-            // 
-            // nudMaxAge
-            // 
-            nudMaxAge.Location = new Point(583, 50);
-            nudMaxAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            nudMaxAge.Name = "nudMaxAge";
-            nudMaxAge.Size = new Size(154, 34);
-            nudMaxAge.TabIndex = 2;
-            nudMaxAge.Value = new decimal(new int[] { 100, 0, 0, 0 });
-            // 
-            // chkCategoryActive
-            // 
-            chkCategoryActive.AutoSize = true;
-            chkCategoryActive.Checked = true;
-            chkCategoryActive.CheckState = CheckState.Checked;
-            chkCategoryActive.Cursor = Cursors.Hand;
-            chkCategoryActive.Location = new Point(720, 52);
-            chkCategoryActive.Name = "chkCategoryActive";
-            chkCategoryActive.Size = new Size(92, 32);
-            chkCategoryActive.TabIndex = 3;
-            chkCategoryActive.Text = "Active";
-            chkCategoryActive.UseVisualStyleBackColor = true;
+            btnUpdateCategory.BackColor = Color.SteelBlue;
+            btnUpdateCategory.Cursor = Cursors.Hand;
+            btnUpdateCategory.FlatAppearance.BorderSize = 0;
+            btnUpdateCategory.FlatStyle = FlatStyle.Flat;
+            btnUpdateCategory.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnUpdateCategory.ForeColor = Color.White;
+            btnUpdateCategory.Location = new Point(229, 120);
+            btnUpdateCategory.Name = "btnUpdateCategory";
+            btnUpdateCategory.Size = new Size(130, 40);
+            btnUpdateCategory.TabIndex = 5;
+            btnUpdateCategory.Text = "Update";
+            btnUpdateCategory.UseVisualStyleBackColor = false;
+            btnUpdateCategory.Click += btnUpdateCategory_Click;
             // 
             // btnAddCategory
             // 
@@ -178,51 +153,80 @@
             btnAddCategory.TabIndex = 4;
             btnAddCategory.Text = "Add Category";
             btnAddCategory.UseVisualStyleBackColor = false;
+            btnAddCategory.Click += btnAddCategory_Click;
             // 
-            // btnUpdateCategory
+            // chkCategoryActive
             // 
-            btnUpdateCategory.BackColor = Color.SteelBlue;
-            btnUpdateCategory.Cursor = Cursors.Hand;
-            btnUpdateCategory.FlatAppearance.BorderSize = 0;
-            btnUpdateCategory.FlatStyle = FlatStyle.Flat;
-            btnUpdateCategory.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnUpdateCategory.ForeColor = Color.White;
-            btnUpdateCategory.Location = new Point(229, 120);
-            btnUpdateCategory.Name = "btnUpdateCategory";
-            btnUpdateCategory.Size = new Size(130, 40);
-            btnUpdateCategory.TabIndex = 4;
-            btnUpdateCategory.Text = "Update";
-            btnUpdateCategory.UseVisualStyleBackColor = false;
+            chkCategoryActive.AutoSize = true;
+            chkCategoryActive.Checked = true;
+            chkCategoryActive.CheckState = CheckState.Checked;
+            chkCategoryActive.Cursor = Cursors.Hand;
+            chkCategoryActive.Location = new Point(743, 52);
+            chkCategoryActive.Name = "chkCategoryActive";
+            chkCategoryActive.Size = new Size(92, 32);
+            chkCategoryActive.TabIndex = 3;
+            chkCategoryActive.Text = "Active";
+            chkCategoryActive.UseVisualStyleBackColor = true;
             // 
-            // btnDeleteCategory
+            // nudMaxAge
             // 
-            btnDeleteCategory.BackColor = Color.IndianRed;
-            btnDeleteCategory.Cursor = Cursors.Hand;
-            btnDeleteCategory.FlatAppearance.BorderSize = 0;
-            btnDeleteCategory.FlatStyle = FlatStyle.Flat;
-            btnDeleteCategory.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDeleteCategory.ForeColor = Color.White;
-            btnDeleteCategory.Location = new Point(377, 120);
-            btnDeleteCategory.Name = "btnDeleteCategory";
-            btnDeleteCategory.Size = new Size(130, 40);
-            btnDeleteCategory.TabIndex = 4;
-            btnDeleteCategory.Text = "Delete";
-            btnDeleteCategory.UseVisualStyleBackColor = false;
+            nudMaxAge.Location = new Point(583, 50);
+            nudMaxAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudMaxAge.Name = "nudMaxAge";
+            nudMaxAge.Size = new Size(154, 34);
+            nudMaxAge.TabIndex = 2;
+            nudMaxAge.Value = new decimal(new int[] { 100, 0, 0, 0 });
             // 
-            // btnClearCategory
+            // nudMinAge
             // 
-            btnClearCategory.BackColor = Color.Gray;
-            btnClearCategory.Cursor = Cursors.Hand;
-            btnClearCategory.FlatAppearance.BorderSize = 0;
-            btnClearCategory.FlatStyle = FlatStyle.Flat;
-            btnClearCategory.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnClearCategory.ForeColor = Color.White;
-            btnClearCategory.Location = new Point(530, 120);
-            btnClearCategory.Name = "btnClearCategory";
-            btnClearCategory.Size = new Size(130, 40);
-            btnClearCategory.TabIndex = 4;
-            btnClearCategory.Text = "Clear";
-            btnClearCategory.UseVisualStyleBackColor = false;
+            nudMinAge.Location = new Point(396, 50);
+            nudMinAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudMinAge.Name = "nudMinAge";
+            nudMinAge.Size = new Size(154, 34);
+            nudMinAge.TabIndex = 1;
+            nudMinAge.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // txtCategoryName
+            // 
+            txtCategoryName.BorderStyle = BorderStyle.FixedSingle;
+            txtCategoryName.Location = new Point(30, 45);
+            txtCategoryName.Name = "txtCategoryName";
+            txtCategoryName.PlaceholderText = "Enter category name";
+            txtCategoryName.Size = new Size(300, 34);
+            txtCategoryName.TabIndex = 0;
+            // 
+            // lblMaxAge
+            // 
+            lblMaxAge.AutoSize = true;
+            lblMaxAge.BackColor = Color.Transparent;
+            lblMaxAge.ForeColor = Color.Black;
+            lblMaxAge.Location = new Point(530, 20);
+            lblMaxAge.Name = "lblMaxAge";
+            lblMaxAge.Size = new Size(139, 28);
+            lblMaxAge.TabIndex = 0;
+            lblMaxAge.Text = "Maximum Age";
+            // 
+            // lblMinAge
+            // 
+            lblMinAge.AutoSize = true;
+            lblMinAge.BackColor = Color.Transparent;
+            lblMinAge.ForeColor = Color.Black;
+            lblMinAge.Location = new Point(360, 20);
+            lblMinAge.Name = "lblMinAge";
+            lblMinAge.Size = new Size(136, 28);
+            lblMinAge.TabIndex = 0;
+            lblMinAge.Text = "Minimum Age";
+            // 
+            // lblCategoryName
+            // 
+            lblCategoryName.AutoSize = true;
+            lblCategoryName.BackColor = Color.Transparent;
+            lblCategoryName.ForeColor = Color.Black;
+            lblCategoryName.Location = new Point(30, 20);
+            lblCategoryName.Name = "lblCategoryName";
+            lblCategoryName.Size = new Size(149, 28);
+            lblCategoryName.TabIndex = 0;
+            lblCategoryName.Text = "Category Name";
             // 
             // dgvCategories
             // 
@@ -239,7 +243,7 @@
             dgvCategories.RowHeadersWidth = 62;
             dgvCategories.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCategories.Size = new Size(1040, 270);
-            dgvCategories.TabIndex = 2;
+            dgvCategories.TabIndex = 8;
             // 
             // FrmCompetitionCategories
             // 
@@ -256,12 +260,13 @@
             Name = "FrmCompetitionCategories";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SwimPro Academy - Competition Categories";
+            Load += FrmCompetitionCategories_Load;
             pnlCategoryHeader.ResumeLayout(false);
             pnlCategoryHeader.PerformLayout();
             pnlCategoryInput.ResumeLayout(false);
             pnlCategoryInput.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudMinAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudMaxAge).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudMinAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvCategories).EndInit();
             ResumeLayout(false);
         }
