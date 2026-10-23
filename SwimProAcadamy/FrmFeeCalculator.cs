@@ -27,7 +27,7 @@ namespace SwimProAcadamy
 
         private void FrmFeeCalculator_Load(object? sender, EventArgs e)
         {
-            if (!UserSession.IsAdmin() && !UserSession.IsManager() && !UserSession.IsStaff() && !UserSession.IsStudent())
+            if (!UserSession.HasPermission("CALCULATE_FEES"))
             {
                 MessageBox.Show("You do not have permission to access this feature.", "Access Denied", 
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -123,8 +123,12 @@ namespace SwimProAcadamy
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            // An age/category mismatch is displayed as a status message. It does
-            // not prevent calculation of the compulsory monthly training fee.
+            if (selectedMinimumAge.HasValue && !IsAgeCategoryValid())
+            {
+                MessageBox.Show("The swimmer age does not match the selected competition category. Correct the swimmer record before calculating the fee.",
+                    "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             decimal training = selectedTrainingFee;
             decimal competition = competitions * SwimProRules.CompetitionFee;
@@ -163,10 +167,15 @@ namespace SwimProAcadamy
                 MessageBox.Show("Calculate the fee before saving it.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (UserSession.IsStudent())
+            if (!UserSession.HasPermission("SAVE_FEES"))
             {
-                MessageBox.Show("Students can view their fees but cannot save fee calculations.", "Permission Denied", 
+                MessageBox.Show("You do not have permission to save fee calculations.", "Permission Denied",
                     MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+            if (selectedMinimumAge.HasValue && !IsAgeCategoryValid())
+            {
+                MessageBox.Show("Invalid age/category selection. The fee cannot be saved.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             try

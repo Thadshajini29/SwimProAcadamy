@@ -130,20 +130,29 @@ INSERT IGNORE INTO role_permissions (role_id, permission_id)
 SELECT r.id, p.id
 FROM roles r INNER JOIN permissions p ON p.permission_code IN
 ('VIEW_SWIMMERS', 'ADD_SWIMMER', 'EDIT_SWIMMER', 'DELETE_SWIMMER',
- 'CALCULATE_FEES', 'VIEW_FEE_HISTORY', 'VIEW_ALL_FEES', 'VIEW_REPORTS', 'CHANGE_PASSWORD')
+ 'CALCULATE_FEES', 'SAVE_FEES',
+ 'VIEW_FEE_HISTORY', 'VIEW_ALL_FEES', 'VIEW_REPORTS', 'CHANGE_PASSWORD')
 WHERE r.role_name = 'Manager';
 
 INSERT IGNORE INTO role_permissions (role_id, permission_id)
 SELECT r.id, p.id
 FROM roles r INNER JOIN permissions p ON p.permission_code IN
-('VIEW_SWIMMERS', 'ADD_SWIMMER', 'EDIT_SWIMMER', 'CALCULATE_FEES', 'VIEW_FEE_HISTORY', 'CHANGE_PASSWORD')
+('VIEW_SWIMMERS', 'ADD_SWIMMER', 'EDIT_SWIMMER', 'CALCULATE_FEES', 'SAVE_FEES',
+ 'VIEW_FEE_HISTORY', 'CHANGE_PASSWORD')
 WHERE r.role_name = 'Staff';
 
 INSERT IGNORE INTO role_permissions (role_id, permission_id)
 SELECT r.id, p.id
 FROM roles r INNER JOIN permissions p ON p.permission_code IN
-('VIEW_FEE_HISTORY', 'CHANGE_PASSWORD')
+('VIEW_SWIMMERS', 'VIEW_FEE_HISTORY', 'CHANGE_PASSWORD')
 WHERE r.role_name = 'Student';
+
+-- Keep the assignment RBAC rules correct if this script is run again.
+DELETE rp FROM role_permissions rp
+INNER JOIN roles r ON r.id = rp.role_id
+INNER JOIN permissions p ON p.id = rp.permission_id
+WHERE (r.role_name = 'Manager' AND p.permission_code IN ('MANAGE_PLANS', 'MANAGE_CATEGORIES'))
+   OR (r.role_name IN ('Staff', 'Student') AND p.permission_code = 'VIEW_REPORTS');
 
 INSERT IGNORE INTO training_plans (plan_name, sessions_per_week, weekly_fee, monthly_fee, competition_allowed, is_active) VALUES
 ('Beginner', 2, 200.00, 800.00, 0, 1),
@@ -156,43 +165,6 @@ INSERT IGNORE INTO competition_categories (category_name, min_age, max_age, is_a
 ('Adult', 18, 39, 1),
 ('Senior', 40, 120, 1);
 
--- SAMPLE DATA FOR TESTING. All sample passwords are Password123.
--- Do not use these accounts or password in a production system.
-INSERT IGNORE INTO users (full_name, username, email, password, is_active) VALUES
-('System Administrator', 'admin', 'admin@swimpro.test', SHA2('Password123', 256), 1),
-('Maya Manager', 'manager', 'manager@swimpro.test', SHA2('Password123', 256), 1),
-('Sam Staff', 'staff', 'staff@swimpro.test', SHA2('Password123', 256), 1),
-('Nimal Student', 'student', 'student@swimpro.test', SHA2('Password123', 256), 1),
-('Pending Applicant', 'pending', 'pending@swimpro.test', SHA2('Password123', 256), 0);
-
--- The pending account intentionally has no role and cannot log in.
-INSERT IGNORE INTO user_roles (user_id, role_id)
-SELECT u.id, r.id FROM users u CROSS JOIN roles r
-WHERE (u.username = 'admin' AND r.role_name = 'Admin')
-   OR (u.username = 'manager' AND r.role_name = 'Manager')
-   OR (u.username = 'staff' AND r.role_name = 'Staff')
-   OR (u.username = 'student' AND r.role_name = 'Student');
-
-INSERT IGNORE INTO swimmers
-    (user_id, name, age, training_plan_id, competition_category_id, competitions, coaching_hours, is_active)
-SELECT u.id, 'Nimal Student', 14, tp.id, cc.id, 1, 2.00, 1
-FROM users u
-JOIN training_plans tp ON tp.plan_name = 'Intermediate'
-JOIN competition_categories cc ON cc.category_name = 'Youth'
-WHERE u.username = 'student'
-  AND NOT EXISTS (SELECT 1 FROM swimmers s WHERE s.user_id = u.id);
-
-INSERT IGNORE INTO swimmers
-    (user_id, name, age, training_plan_id, competition_category_id, competitions, coaching_hours, is_active)
-SELECT NULL, 'Kavindi Perera', 10, tp.id, cc.id, 0, 0.00, 1
-FROM training_plans tp
-JOIN competition_categories cc ON cc.category_name = 'Junior'
-WHERE tp.plan_name = 'Beginner'
-  AND NOT EXISTS (SELECT 1 FROM swimmers s WHERE s.name = 'Kavindi Perera');
-
-INSERT IGNORE INTO fees
-    (swimmer_id, training_fee, competition_fee, coaching_fee, total_fee, fee_month, created_by)
-SELECT s.id, 1100.00, 300.00, 1000.00, 2400.00, '2026-10-01', u.id
-FROM swimmers s
-JOIN users u ON u.username = 'admin'
-WHERE s.name = 'Nimal Student';
+-- No user accounts are seeded. The application's first public registration
+-- atomically creates the initial active Admin account. Later registrations
+-- remain inactive until that Admin assigns a role and activates them.

@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRegister));
             pnlRegister = new Panel();
+            chkActive = new CheckBox();
+            cmbRole = new ComboBox();
             lnkBackLogin = new LinkLabel();
             btnRegister = new Button();
             txtConfirmPassword = new TextBox();
@@ -37,6 +39,7 @@
             txtEmail = new TextBox();
             txtRegUsername = new TextBox();
             txtFullName = new TextBox();
+            lblRole = new Label();
             lblConfirmPassword = new Label();
             lblRegPassword = new Label();
             lblEmail = new Label();
@@ -51,6 +54,8 @@
             // pnlRegister
             // 
             pnlRegister.BackColor = Color.White;
+            pnlRegister.Controls.Add(chkActive);
+            pnlRegister.Controls.Add(cmbRole);
             pnlRegister.Controls.Add(lnkBackLogin);
             pnlRegister.Controls.Add(btnRegister);
             pnlRegister.Controls.Add(txtConfirmPassword);
@@ -58,6 +63,7 @@
             pnlRegister.Controls.Add(txtEmail);
             pnlRegister.Controls.Add(txtRegUsername);
             pnlRegister.Controls.Add(txtFullName);
+            pnlRegister.Controls.Add(lblRole);
             pnlRegister.Controls.Add(lblConfirmPassword);
             pnlRegister.Controls.Add(lblRegPassword);
             pnlRegister.Controls.Add(lblEmail);
@@ -65,11 +71,34 @@
             pnlRegister.Controls.Add(lblFullName);
             pnlRegister.Controls.Add(lblRegisterTitle);
             pnlRegister.Controls.Add(picRegisterLogo);
-            pnlRegister.Location = new Point(323, 12);
+            pnlRegister.Location = new Point(322, 4);
             pnlRegister.Name = "pnlRegister";
-            pnlRegister.Size = new Size(500, 570);
+            pnlRegister.Size = new Size(500, 628);
             pnlRegister.TabIndex = 0;
             pnlRegister.Paint += pnlRegister_Paint;
+            // 
+            // chkActive
+            // 
+            chkActive.AutoSize = true;
+            chkActive.Checked = true;
+            chkActive.CheckState = CheckState.Checked;
+            chkActive.Location = new Point(259, 501);
+            chkActive.Name = "chkActive";
+            chkActive.Size = new Size(169, 32);
+            chkActive.TabIndex = 6;
+            chkActive.Text = "Active Account";
+            chkActive.UseVisualStyleBackColor = true;
+            chkActive.CheckedChanged += chkActive_CheckedChanged;
+            // 
+            // cmbRole
+            // 
+            cmbRole.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbRole.FormattingEnabled = true;
+            cmbRole.Location = new Point(40, 498);
+            cmbRole.Name = "cmbRole";
+            cmbRole.Size = new Size(190, 36);
+            cmbRole.TabIndex = 5;
+            cmbRole.SelectedIndexChanged += cmbRole_SelectedIndexChanged;
             // 
             // lnkBackLogin
             // 
@@ -77,7 +106,7 @@
             lnkBackLogin.BackColor = Color.Transparent;
             lnkBackLogin.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lnkBackLogin.LinkColor = Color.DodgerBlue;
-            lnkBackLogin.Location = new Point(129, 520);
+            lnkBackLogin.Location = new Point(129, 600);
             lnkBackLogin.Name = "lnkBackLogin";
             lnkBackLogin.Size = new Size(262, 25);
             lnkBackLogin.TabIndex = 8;
@@ -92,7 +121,7 @@
             btnRegister.FlatStyle = FlatStyle.Flat;
             btnRegister.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRegister.ForeColor = Color.White;
-            btnRegister.Location = new Point(40, 470);
+            btnRegister.Location = new Point(40, 550);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(420, 42);
             btnRegister.TabIndex = 7;
@@ -155,6 +184,17 @@
             txtFullName.PlaceholderText = "Enter your full name";
             txtFullName.Size = new Size(420, 37);
             txtFullName.TabIndex = 0;
+            // 
+            // lblRole
+            // 
+            lblRole.AutoSize = true;
+            lblRole.BackColor = Color.Transparent;
+            lblRole.ForeColor = Color.Black;
+            lblRole.Location = new Point(40, 475);
+            lblRole.Name = "lblRole";
+            lblRole.Size = new Size(50, 28);
+            lblRole.TabIndex = 2;
+            lblRole.Text = "Role";
             // 
             // lblConfirmPassword
             // 
@@ -272,5 +312,8 @@
         private TextBox txtConfirmPassword;
         private Label lblConfirmPassword;
         private LinkLabel lnkBackLogin;
+        private CheckBox chkActive;
+        private ComboBox cmbRole;
+        private Label lblRole;
     }
 }

@@ -14,13 +14,12 @@ namespace SwimProAcadamy
         public FrmTrainingPlans()
         {
             InitializeComponent();
-            Load += FrmTrainingPlans_Load;
             dgvTrainingPlans.CellClick += DgvTrainingPlans_CellClick;
         }
 
         private void FrmTrainingPlans_Load(object? sender, EventArgs e)
         {
-            if (!UserSession.IsAdmin() && !UserSession.IsManager())
+            if (!UserSession.HasPermission("MANAGE_PLANS"))
             {
                 MessageBox.Show("You do not have permission to access this feature.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();

@@ -60,7 +60,15 @@ namespace SwimProAcadamy
                 }
                 else
                 {
-                    MessageBox.Show("Invalid username/email or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (!userDal.HasAnyUsers())
+                    {
+                        MessageBox.Show("No account exists yet. Click Register to create the first Administrator account.",
+                            "Initial Setup", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid username/email or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             catch (Exception ex)
@@ -71,12 +79,25 @@ namespace SwimProAcadamy
 
         private void LnkRegister_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
-            Hide();
-            using (FrmRegister registerForm = new FrmRegister())
+            try
             {
-                registerForm.ShowDialog();
+                if (userDal.HasAnyUsers())
+                {
+                    MessageBox.Show("New accounts can only be created by an Administrator after logging in.", "Administrator Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                Hide();
+                using (FrmRegister registerForm = new FrmRegister(bootstrapMode: true))
+                {
+                    registerForm.ShowDialog();
+                }
+                Show();
             }
-            Show();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to check account setup: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void chkShowPassword_CheckedChanged(object? sender, EventArgs e)

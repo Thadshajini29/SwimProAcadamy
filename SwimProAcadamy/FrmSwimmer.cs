@@ -28,7 +28,7 @@ namespace SwimProAcadamy
 
         private void FrmSwimmer_Load(object? sender, EventArgs e)
         {
-            if (!UserSession.IsAdmin() && !UserSession.IsManager() && !UserSession.IsStaff())
+            if (!UserSession.HasPermission("VIEW_SWIMMERS") && !UserSession.IsStudent())
             {
                 MessageBox.Show("You do not have permission to access this feature.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
@@ -37,11 +37,19 @@ namespace SwimProAcadamy
             PopulateDropdowns();
             LoadSwimmers();
 
-            // Staff users cannot delete swimmers
-            if (UserSession.IsStaff())
+            btnAdd.Enabled = UserSession.HasPermission("ADD_SWIMMER") && !UserSession.IsStudent();
+            btnUpdate.Enabled = UserSession.HasPermission("EDIT_SWIMMER") && !UserSession.IsStudent();
+            btnDelete.Enabled = UserSession.HasPermission("DELETE_SWIMMER") && !UserSession.IsStudent();
+            btnDelete.Visible = btnDelete.Enabled;
+
+            if (UserSession.IsStudent())
             {
-                btnDelete.Enabled = false;
-                btnDelete.Visible = false;
+                Text = "SwimPro Academy - My Profile";
+                txtName.ReadOnly = true;
+                nudAge.Enabled = cmbTrainingPlan.Enabled = cmbCompetitionCategory.Enabled = false;
+                nudCompetitions.Enabled = nudCoachingHours.Enabled = false;
+                txtSearch.Enabled = btnSearch.Enabled = false;
+                btnClear.Visible = false;
             }
 
             ClearInputs();
@@ -90,7 +98,7 @@ namespace SwimProAcadamy
         {
             try
             {
-                dgvSwimmers.DataSource = swimmerDal.GetAllSwimmers(search);
+                dgvSwimmers.DataSource = swimmerDal.GetAllSwimmers(search, UserSession.IsStudent() ? UserSession.UserId : 0);
 
                 var colPlan = dgvSwimmers.Columns["training_plan_id"];
                 if (colPlan != null) colPlan.Visible = false;
@@ -134,12 +142,26 @@ namespace SwimProAcadamy
             return true;
         }
 
+        // Add Button Click Event
         private void BtnAdd_Click(object? sender, EventArgs e)
         {
+            // Check whether the current user has permission to add swimmers.
+            if (!UserSession.HasPermission("ADD_SWIMMER"))
+            {
+                // Display a warning message if the user does not have permission.
+                MessageBox.Show("You do not have permission to add swimmers.", "Permission Denied",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Stop the method if permission is denied.
+                return;
+            }
+            // Validate the input fields before adding a swimmer.
+            // Stop if the input values are invalid.
             if (!ValidateInputs()) return;
 
             try
             {
+                // Create a new Swimmer object and assign the form values.
                 Swimmer swimmer = new Swimmer
                 {
                     Name = txtName.Text.Trim(),
@@ -167,9 +189,19 @@ namespace SwimProAcadamy
 
         private void BtnUpdate_Click(object? sender, EventArgs e)
         {
+            // Check whether the user has permission to update swimmers.
+            if (!UserSession.HasPermission("EDIT_SWIMMER"))
+            {
+                MessageBox.Show("You do not have permission to update swimmers.", "Permission Denied", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Warning);
+                return;
+            }
             if (selectedSwimmerId == 0)
             {
-                MessageBox.Show("Please select a swimmer from the table to update.", "Validation Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a swimmer from the table to update.", "Validation Warning",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -183,7 +215,8 @@ namespace SwimProAcadamy
                     Name = txtName.Text.Trim(),
                     Age = (int)nudAge.Value,
                     TrainingPlanId = Convert.ToInt32(cmbTrainingPlan.SelectedValue),
-                    CompetitionCategoryId = cmbCompetitionCategory.SelectedValue != null ? Convert.ToInt32(cmbCompetitionCategory.SelectedValue) : null,
+                    CompetitionCategoryId = cmbCompetitionCategory.SelectedValue != null ? 
+                    Convert.ToInt32(cmbCompetitionCategory.SelectedValue) : null,
                     Competitions = (int)nudCompetitions.Value,
                     CoachingHours = nudCoachingHours.Value,
                     IsActive = true
@@ -191,23 +224,27 @@ namespace SwimProAcadamy
 
                 if (swimmerDal.UpdateSwimmer(swimmer))
                 {
-                    AuditLogDAL.Log("UPDATE", "Swimmer Management", $"{UserSession.RoleName} updated swimmer ID {selectedSwimmerId} ('{swimmer.Name}').");
-                    MessageBox.Show("Swimmer updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    AuditLogDAL.Log("UPDATE", "Swimmer Management", $"{UserSession.RoleName} " +
+                        $"updated swimmer ID {selectedSwimmerId} ('{swimmer.Name}').");
+                    MessageBox.Show("Swimmer updated successfully.", "Success", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                     LoadSwimmers();
                     ClearInputs();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to update swimmer: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Unable to update swimmer: " + ex.Message, "Database Error", 
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
         private void BtnDelete_Click(object? sender, EventArgs e)
         {
-            if (UserSession.IsStaff())
+            if (!UserSession.HasPermission("DELETE_SWIMMER"))
             {
-                MessageBox.Show("Staff users are not allowed to delete swimmers.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("You do not have permission to delete swimmers.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 

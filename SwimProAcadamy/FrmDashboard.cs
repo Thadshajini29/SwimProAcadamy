@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -8,164 +9,165 @@ namespace SwimProAcadamy
 {
     public partial class FrmDashboard : Form
     {
+        private readonly List<Panel> cards;
+
         public FrmDashboard()
         {
             InitializeComponent();
-            btnSwimmers.Click += (s, e) => new FrmSwimmer().ShowDialog();
-            btnFeeCalculator.Click += (s, e) => new FrmFeeCalculator().ShowDialog();
-            btnReports.Click += (s, e) => new FrmReports().ShowDialog();
-            btnTrainingPlans.Click += (s, e) => new FrmTrainingPlans().ShowDialog();
-            btnUserManagement.Click += (s, e) => new FrmUserManagement().ShowDialog();
-            btnAuditLog.Click += (s, e) => new FrmAuditLog().ShowDialog();
-            cmbRolePreview.SelectedIndexChanged += cmbRolePreview_SelectedIndexChanged;
+            cards = new List<Panel> { pnlSwimmers, pnlTrainingPlans, pnlCompetitionCategories, pnlFeeCalculator, pnlFeeHistory, pnlReports, pnlUserManagement, pnlAudit };
+
+            btnSwimmers.Click += (s, e) => OpenSwimmers();
+            btnTrainingPlans.Click += (s, e) => OpenProtected("MANAGE_PLANS", () => new FrmTrainingPlans());
+            btnCompetitionCategories.Click += (s, e) => OpenProtected("MANAGE_CATEGORIES", () => new FrmCompetitionCategories());
+            btnFeeCalculator.Click += (s, e) => OpenProtected("CALCULATE_FEES", () => new FrmFeeCalculator());
+            btnFeeHistory.Click += (s, e) => OpenProtected("VIEW_FEE_HISTORY", () => new FrmFeeHistory());
+            btnReports.Click += (s, e) => OpenProtected("VIEW_REPORTS", () => new FrmReports());
+            btnUserManagement.Click += (s, e) => OpenProtected("MANAGE_USERS", () => new FrmUserManagement());
+            btnAuditLog.Click += (s, e) => OpenProtected("VIEW_AUDIT_LOG", () => new FrmAuditLog());
+            btnLogout.Click += btnLogout_Click;
+            lnkGoToRegister.LinkClicked += lnkGoToRegister_LinkClicked;
         }
 
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
-            LoadSwimmerCount();
+            if (UserSession.UserId <= 0) { Close(); return; }
 
-            string loginRole = UserSession.RoleName?.Trim() ?? string.Empty;
-            int roleIndex = cmbRolePreview.FindStringExact(loginRole);
-            cmbRolePreview.SelectedIndex = roleIndex >= 0 ? roleIndex : 0;
+            cmbRolePreview.Items.Clear();
+            cmbRolePreview.Items.Add(UserSession.RoleName);
+            cmbRolePreview.SelectedIndex = 0;
+            cmbRolePreview.Enabled = false;
+            lblRole.Text = "Role:";
+            lblWelcome.Text = $"Welcome, {UserSession.FullName}";
+            lnkGoToRegister.Text = "+ Create New Account";
+            lnkGoToRegister.Visible = UserSession.HasPermission("MANAGE_USERS");
+            ConfigureDashboard();
+            LoadSummary();
         }
 
-        private void cmbRolePreview_SelectedIndexChanged(object? sender, EventArgs e)
+        private void ConfigureDashboard()
         {
-            if (cmbRolePreview.SelectedItem == null) return;
+            ResetCardText();
+            SetCardVisibility(
+                UserSession.HasPermission("VIEW_SWIMMERS") || UserSession.IsStudent(),
+                UserSession.HasPermission("MANAGE_PLANS") || UserSession.IsStudent(),
+                UserSession.HasPermission("MANAGE_CATEGORIES") || UserSession.IsStudent(),
+                UserSession.HasPermission("CALCULATE_FEES") || UserSession.IsStudent(),
+                UserSession.HasPermission("VIEW_FEE_HISTORY"),
+                UserSession.HasPermission("VIEW_REPORTS") && !UserSession.IsStudent(),
+                UserSession.HasPermission("MANAGE_USERS"),
+                UserSession.HasPermission("VIEW_AUDIT_LOG"));
 
-            string selectedRole = cmbRolePreview.SelectedItem.ToString() ?? string.Empty;
-            UpdateWelcomeMessage(selectedRole);
-
-            switch (selectedRole)
+            if (UserSession.IsStudent())
             {
-                case "Admin": SetAdminDashboard(); break;
-                case "Manager": SetManagerDashboard(); break;
-                case "Staff": SetStaffDashboard(); break;
-                case "Student": SetStudentDashboard(); break;
+                lblSwimmersCardTitle.Text = "My Profile"; btnSwimmers.Text = "View My Profile";
+                lblTrainingPlansTitle.Text = "My Training Plan"; btnTrainingPlans.Text = "View My Training Plan";
+                lblCompetitionCategoriesTitle.Text = "My Competition Category"; btnCompetitionCategories.Text = "View My Category";
+                lblFeeCalculatorTitle.Text = "My Monthly Fee"; btnFeeCalculator.Text = "View My Monthly Fee";
+                lblFeeHistoryTitle.Text = "My Fee History"; btnFeeHistory.Text = "View My Fee History";
             }
-        }
-
-        private void SetAdminDashboard()
-        {
-            ResetCardText();
-            SetCards(true, true, true, true, true, true);
-            pnlSwimmers.Location = new Point(50, 120);
-            pnlTrainingPlans.Location = new Point(435, 120);
-            pnlFees.Location = new Point(820, 120);
-            pnlReports.Location = new Point(50, 370);
-            pnlUsers.Location = new Point(435, 370);
-            pnlAudit.Location = new Point(820, 370);
-            lblRole.Text = "Role:";
-        }
-
-        private void SetManagerDashboard()
-        {
-            ResetCardText();
-            SetCards(true, true, true, true, false, false);
-            pnlSwimmers.Location = new Point(170, 120);
-            pnlTrainingPlans.Location = new Point(550, 120);
-            pnlFees.Location = new Point(170, 370);
-            pnlReports.Location = new Point(550, 370);
-            lblRole.Text = "Role:";
-        }
-
-        private void SetStaffDashboard()
-        {
-            ResetCardText();
-            SetCards(true, false, true, true, false, false);
-            pnlSwimmers.Location = new Point(50, 200);
-            pnlFees.Location = new Point(435, 200);
-            pnlReports.Location = new Point(820, 200);
-            lblRole.Text = "Role:";
-        }
-
-        private void SetStudentDashboard()
-        {
-            ResetCardText();
-            SetCards(false, false, true, true, false, false);
-            pnlFees.Location = new Point(245, 200);
-            pnlReports.Location = new Point(625, 200);
-            lblFees.Text = "Monthly Fees";
-            btnFeeCalculator.Text = "View your monthly fee details";
-            lblReports.Text = "My Reports";
-            btnReports.Text = "View your swimming reports";
-            lblRole.Text = "Role:";
-        }
-
-        private void SetCards(bool swimmers, bool plans, bool fees, bool reports, bool users, bool audit)
-        {
-            pnlSwimmers.Visible = swimmers;
-            pnlTrainingPlans.Visible = plans;
-            pnlFees.Visible = fees;
-            pnlReports.Visible = reports;
-            pnlUsers.Visible = users;
-            pnlAudit.Visible = audit;
+            ArrangeVisibleCards();
         }
 
         private void ResetCardText()
         {
-            lblFees.Text = "Monthly Fees";
-            btnFeeCalculator.Text = "Calculate Fees";
-            lblReports.Text = "Reports";
-            btnReports.Text = "View Reports";
+            lblSwimmersCardTitle.Text = "Swimmers"; btnSwimmers.Text = "Open Swimmers";
+            lblTrainingPlansTitle.Text = "Training Plans"; btnTrainingPlans.Text = "Open Training Plans";
+            lblCompetitionCategoriesTitle.Text = "Competition Categories"; btnCompetitionCategories.Text = "Open Categories";
+            lblFeeCalculatorTitle.Text = "Monthly Fee Calculator"; btnFeeCalculator.Text = "Calculate Fees";
+            lblFeeHistoryTitle.Text = "Fee History"; btnFeeHistory.Text = "View Fee History";
+            lblReportsTitle.Text = "Reports"; btnReports.Text = "View Reports";
         }
 
-        private void LoadSwimmerCount()
+        private void SetCardVisibility(bool swimmers, bool plans, bool categories, bool calculator, bool history, bool reports, bool users, bool audit)
+        {
+            pnlSwimmers.Visible = swimmers; pnlTrainingPlans.Visible = plans;
+            pnlCompetitionCategories.Visible = categories; pnlFeeCalculator.Visible = calculator;
+            pnlFeeHistory.Visible = history; pnlReports.Visible = reports;
+            pnlUserManagement.Visible = users; pnlAudit.Visible = audit;
+        }
+
+        private void ArrangeVisibleCards()
+        {
+            int index = 0;
+            foreach (Panel card in cards)
+            {
+                if (!card.Visible) continue;
+                card.Location = new Point(30 + ((index % 4) * 295), 260 + ((index / 4) * 165));
+                index++;
+            }
+        }
+
+        private void LoadSummary()
         {
             try
             {
                 using MySqlConnection connection = DatabaseHelper.GetConnection();
-                using MySqlCommand command = new MySqlCommand("SELECT COUNT(*) FROM swimmers", connection);
                 connection.Open();
-                lblSwimmerCount.Text = Convert.ToString(command.ExecuteScalar()) ?? "0";
+                if (UserSession.IsStudent())
+                {
+                    lblSwimmerCount.Text = GetStudentCount(connection, "SELECT COUNT(*) FROM swimmers WHERE is_active = 1 AND user_id = @userId");
+                    lblPlanCount.Text = GetStudentCount(connection, "SELECT COUNT(DISTINCT training_plan_id) FROM swimmers WHERE is_active = 1 AND user_id = @userId");
+                    lblMonthlyFees.Text = GetStudentCount(connection, "SELECT COUNT(*) FROM fees f INNER JOIN swimmers s ON s.id = f.swimmer_id WHERE s.user_id = @userId AND DATE_FORMAT(f.fee_month, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m')");
+                    lblCompetitionCount.Text = GetStudentCount(connection, "SELECT COALESCE(SUM(competitions), 0) FROM swimmers WHERE is_active = 1 AND user_id = @userId");
+                    return;
+                }
+                lblSwimmerCount.Text = GetCount(connection, "SELECT COUNT(*) FROM swimmers WHERE is_active = 1");
+                lblPlanCount.Text = GetCount(connection, "SELECT COUNT(*) FROM training_plans WHERE is_active = 1");
+                lblMonthlyFees.Text = GetCount(connection, "SELECT COUNT(*) FROM fees WHERE DATE_FORMAT(fee_month, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m')");
+                lblCompetitionCount.Text = GetCount(connection, "SELECT COALESCE(SUM(competitions), 0) FROM swimmers WHERE is_active = 1");
             }
-            catch
-            {
-                lblSwimmerCount.Text = "0";
-            }
+            catch { lblSwimmerCount.Text = lblPlanCount.Text = lblMonthlyFees.Text = lblCompetitionCount.Text = "0"; }
         }
 
-        private void UpdateWelcomeMessage(string selectedRole)
+        private static string GetCount(MySqlConnection connection, string sql)
         {
-            // Keep the real logged-in user's name when their own role is shown.
-            // For dashboard layout testing, display an active sample user of the
-            // selected role without changing UserSession or login permissions.
-            if (string.Equals(UserSession.RoleName, selectedRole, StringComparison.OrdinalIgnoreCase) &&
-                !string.IsNullOrWhiteSpace(UserSession.FullName))
+            using MySqlCommand command = new MySqlCommand(sql, connection);
+            return Convert.ToString(command.ExecuteScalar()) ?? "0";
+        }
+
+        private static string GetStudentCount(MySqlConnection connection, string sql)
+        {
+            using MySqlCommand command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@userId", UserSession.UserId);
+            return Convert.ToString(command.ExecuteScalar()) ?? "0";
+        }
+
+        private void OpenSwimmers()
+        {
+            if (!UserSession.HasPermission("VIEW_SWIMMERS") && !UserSession.IsStudent()) { Deny(); return; }
+            using FrmSwimmer form = new FrmSwimmer();
+            form.ShowDialog(this);
+            LoadSummary();
+        }
+
+        private void OpenProtected(string permission, Func<Form> createForm)
+        {
+            if (UserSession.IsStudent() && (permission == "CALCULATE_FEES" || permission == "MANAGE_PLANS" || permission == "MANAGE_CATEGORIES"))
             {
-                lblWelcome.Text = $"Welcome, {UserSession.FullName}";
+                if (permission == "CALCULATE_FEES") { using FrmFeeHistory feeHistoryForm = new FrmFeeHistory(); feeHistoryForm.ShowDialog(this); }
+                else OpenSwimmers();
                 return;
             }
-
-            try
-            {
-                using MySqlConnection connection = DatabaseHelper.GetConnection();
-                using MySqlCommand command = new MySqlCommand(@"SELECT u.full_name
-                    FROM users u
-                    INNER JOIN user_roles ur ON ur.user_id = u.id
-                    INNER JOIN roles r ON r.id = ur.role_id
-                    WHERE r.role_name = @role AND u.is_active = 1
-                    ORDER BY u.id LIMIT 1", connection);
-                command.Parameters.AddWithValue("@role", selectedRole);
-                connection.Open();
-                string name = Convert.ToString(command.ExecuteScalar()) ?? string.Empty;
-                lblWelcome.Text = string.IsNullOrWhiteSpace(name)
-                    ? $"Welcome to SwimPro Academy ({selectedRole})"
-                    : $"Welcome, {name}";
-            }
-            catch
-            {
-                lblWelcome.Text = "Welcome to SwimPro Academy";
-            }
+            if (!UserSession.HasPermission(permission)) { Deny(); return; }
+            using Form form = createForm();
+            form.ShowDialog(this);
+            LoadSummary();
         }
 
-        // Kept for the Click event generated by the Windows Forms Designer.
-        private void btnLogout_Click(object sender, EventArgs e)
+        private static void Deny() => MessageBox.Show("You do not have permission to access this feature.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+        private void lnkGoToRegister_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (!UserSession.HasPermission("MANAGE_USERS")) { Deny(); return; }
+            using FrmRegister form = new FrmRegister();
+            form.ShowDialog(this);
+        }
+
+        private void btnLogout_Click(object? sender, EventArgs e)
+        {
+            AuditLogDAL.Log("LOGOUT", "Authentication", $"User '{UserSession.Username}' logged out.");
             UserSession.Clear();
             Close();
         }
-
-        // Required by the ComboBox event assigned in FrmDashboard.Designer.cs.
     }
 }

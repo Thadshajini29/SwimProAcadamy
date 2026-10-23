@@ -56,7 +56,7 @@ namespace SwimProAcadamy
 
         private void FrmCompetitionCategories_Load(object sender, EventArgs e)
         {
-            if (!UserSession.IsAdmin() && !UserSession.IsManager())
+            if (!UserSession.HasPermission("MANAGE_CATEGORIES"))
             {
                 MessageBox.Show("You do not have permission to access this feature.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();

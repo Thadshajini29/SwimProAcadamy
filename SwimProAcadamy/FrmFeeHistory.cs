@@ -17,6 +17,12 @@ namespace SwimProAcadamy
 
         private void FrmFeeHistory_Load(object? sender, EventArgs e)
         {
+            if (!UserSession.HasPermission("VIEW_FEE_HISTORY"))
+            {
+                MessageBox.Show("You do not have permission to access this feature.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
+                return;
+            }
             LoadFeeHistory();
         }
 

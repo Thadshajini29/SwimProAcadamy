@@ -6,7 +6,7 @@ namespace SwimProAcadamy.DAL
 {
     public class ReportDAL
     {
-        public DataTable GenerateReport(string reportType, DateTime fromDate, DateTime toDate)
+        public DataTable GenerateReport(string reportType, DateTime fromDate, DateTime toDate, int studentUserId = 0)
         {
             DataTable table = new DataTable();
             using (MySqlConnection connection = DatabaseHelper.GetConnection())
@@ -17,6 +17,31 @@ namespace SwimProAcadamy.DAL
 
                 switch (reportType)
                 {
+                    case "My Swimming Details":
+                        if (studentUserId <= 0) throw new InvalidOperationException("A student account is required for this report.");
+                        sql = @"SELECT s.id AS `ID`, s.name AS `Swimmer Name`, s.age AS `Age`,
+                                       tp.plan_name AS `Training Plan`, COALESCE(cc.category_name, 'None') AS `Competition Category`,
+                                       s.competitions AS `Competitions`, s.coaching_hours AS `Coaching Hours`
+                                FROM swimmers s
+                                INNER JOIN training_plans tp ON s.training_plan_id = tp.id
+                                LEFT JOIN competition_categories cc ON s.competition_category_id = cc.id
+                                WHERE s.user_id = @studentUserId ORDER BY s.id";
+                        command.Parameters.AddWithValue("@studentUserId", studentUserId);
+                        break;
+
+                    case "My Monthly Fees":
+                        if (studentUserId <= 0) throw new InvalidOperationException("A student account is required for this report.");
+                        sql = @"SELECT f.id AS `ID`, s.name AS `Swimmer Name`, f.training_fee AS `Training Fee`,
+                                       f.competition_fee AS `Competition Fee`, f.coaching_fee AS `Coaching Fee`,
+                                       f.total_fee AS `Total Fee`, DATE_FORMAT(f.fee_month, '%Y-%m') AS `Fee Month`, f.created_at AS `Date`
+                                FROM fees f INNER JOIN swimmers s ON f.swimmer_id = s.id
+                                WHERE s.user_id = @studentUserId AND f.created_at >= @fromDate AND f.created_at <= @toDate
+                                ORDER BY f.created_at DESC";
+                        command.Parameters.AddWithValue("@studentUserId", studentUserId);
+                        command.Parameters.AddWithValue("@fromDate", fromDate.Date);
+                        command.Parameters.AddWithValue("@toDate", toDate.Date.AddDays(1).AddSeconds(-1));
+                        break;
+
                     case "All Swimmers":
                         sql = @"SELECT s.id AS `ID`,
                                        s.name AS `Swimmer Name`,

@@ -8,7 +8,7 @@ namespace SwimProAcadamy.DAL
 {
     public class SwimmerDal
     {
-        public DataTable GetAllSwimmers(string search = "")
+        public DataTable GetAllSwimmers(string search = "", int userId = 0)
         {
             DataTable table = new DataTable();
             using MySqlConnection connection = DatabaseHelper.GetConnection();
@@ -18,8 +18,9 @@ namespace SwimProAcadamy.DAL
                 s.training_plan_id, s.competition_category_id FROM swimmers s
                 INNER JOIN training_plans tp ON s.training_plan_id=tp.id
                 LEFT JOIN competition_categories cc ON s.competition_category_id=cc.id
-                WHERE s.name LIKE @search ORDER BY s.id", connection);
+                WHERE s.name LIKE @search" + (userId > 0 ? " AND s.user_id = @userId" : "") + " ORDER BY s.id", connection);
             command.Parameters.AddWithValue("@search", "%" + search.Trim() + "%");
+            if (userId > 0) command.Parameters.AddWithValue("@userId", userId);
             using MySqlDataAdapter adapter = new MySqlDataAdapter(command); adapter.Fill(table); return table;
         }
 

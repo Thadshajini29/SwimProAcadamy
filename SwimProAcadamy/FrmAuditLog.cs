@@ -36,7 +36,7 @@ namespace SwimProAcadamy
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            if (!UserSession.IsAdmin())
+            if (!UserSession.HasPermission("VIEW_AUDIT_LOG"))
             {
                 MessageBox.Show("You do not have permission to access this feature.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();

@@ -20,7 +20,7 @@ namespace SwimProAcadamy
 
         private void FrmUserManagement_Load(object? sender, EventArgs e)
         {
-            if (!UserSession.IsAdmin())
+            if (!UserSession.HasPermission("MANAGE_USERS"))
             {
                 MessageBox.Show("You do not have permission to access this feature.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
@@ -87,6 +87,12 @@ namespace SwimProAcadamy
             if (isNewUser && string.IsNullOrWhiteSpace(txtUserPassword.Text))
             {
                 MessageBox.Show("Password is required for new users.", "Validation Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (isNewUser && txtUserPassword.Text.Length < 8)
+            {
+                MessageBox.Show("Password must contain at least 8 characters.", "Validation Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 

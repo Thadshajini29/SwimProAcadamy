@@ -23,7 +23,7 @@ namespace SwimProAcadamy
 
         private void FrmReports_Load(object? sender, EventArgs e)
         {
-            if (!UserSession.IsAdmin() && !UserSession.IsManager() && !UserSession.IsStaff() && !UserSession.IsStudent())
+            if (!UserSession.HasPermission("VIEW_REPORTS"))
             {
                 MessageBox.Show("You do not have permission to access this feature.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
@@ -31,13 +31,20 @@ namespace SwimProAcadamy
             }
 
             cmbReportType.Items.Clear();
-            cmbReportType.Items.AddRange(new string[] {
-                "All Swimmers",
-                "Monthly Fees",
-                "Competition Entries",
-                "Private Coaching",
-                "Training Plans"
-            });
+            if (UserSession.IsStudent())
+            {
+                cmbReportType.Items.AddRange(new string[] { "My Swimming Details", "My Monthly Fees" });
+            }
+            else
+            {
+                cmbReportType.Items.AddRange(new string[] {
+                    "All Swimmers",
+                    "Monthly Fees",
+                    "Competition Entries",
+                    "Private Coaching",
+                    "Training Plans"
+                });
+            }
 
             cmbReportType.SelectedIndex = 0;
             dtpFromDate.Value = DateTime.Now.AddMonths(-1);
@@ -71,7 +78,8 @@ namespace SwimProAcadamy
 
             try
             {
-                DataTable reportData = reportDal.GenerateReport(reportType, fromDate, toDate);
+                int studentUserId = UserSession.IsStudent() ? UserSession.UserId : 0;
+                DataTable reportData = reportDal.GenerateReport(reportType, fromDate, toDate, studentUserId);
                 dgvReports.DataSource = reportData;
 
                 lblTotalRecords.Text = $"Total Records: {reportData.Rows.Count}";
@@ -159,4 +167,3 @@ namespace SwimProAcadamy
         }
     }
 }
-

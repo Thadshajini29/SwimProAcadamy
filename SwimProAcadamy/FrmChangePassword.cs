@@ -16,6 +16,16 @@ namespace SwimProAcadamy
             InitializeComponent();
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (!UserSession.HasPermission("CHANGE_PASSWORD"))
+            {
+                MessageBox.Show("You do not have permission to change this password.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
+            }
+        }
+
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             string currentPassword = txtCurrentPassword.Text;
@@ -26,9 +36,9 @@ namespace SwimProAcadamy
                 MessageBox.Show("Please complete all password fields.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (newPassword.Length < 6)
+            if (newPassword.Length < 8)
             {
-                MessageBox.Show("The new password must contain at least 6 characters.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("The new password must contain at least 8 characters.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (newPassword != txtConfirmPassword.Text)
@@ -46,7 +56,7 @@ namespace SwimProAcadamy
                     return;
                 }
                 userDal.ChangePassword(UserSession.UserId, newPassword);
-                AuditLogDAL.Log("UPDATE", "Password", "Changed account password.");
+                AuditLogDAL.Log("CHANGE_PASSWORD", "Password", "Changed account password.");
                 MessageBox.Show("Your password has been changed successfully.", "Change Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
             }

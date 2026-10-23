@@ -31,12 +31,13 @@ namespace SwimProAcadamy.DAL
         {
             using (MySqlConnection connection = DatabaseHelper.GetConnection())
             using (MySqlCommand command = new MySqlCommand(
-                @"INSERT INTO training_plans (plan_name, sessions_per_week, weekly_fee, competition_allowed, is_active)
-                  VALUES (@name, @sessions, @fee, @compAllowed, @isActive)", connection))
+                @"INSERT INTO training_plans (plan_name, sessions_per_week, weekly_fee, monthly_fee, competition_allowed, is_active)
+                  VALUES (@name, @sessions, @fee, @monthlyFee, @compAllowed, @isActive)", connection))
             {
                 command.Parameters.AddWithValue("@name", plan.PlanName.Trim());
                 command.Parameters.AddWithValue("@sessions", plan.SessionsPerWeek);
                 command.Parameters.AddWithValue("@fee", plan.WeeklyFee);
+                command.Parameters.AddWithValue("@monthlyFee", plan.WeeklyFee * 4m);
                 command.Parameters.AddWithValue("@compAllowed", plan.CompetitionAllowed ? 1 : 0);
                 command.Parameters.AddWithValue("@isActive", plan.IsActive ? 1 : 0);
                 connection.Open();
@@ -49,12 +50,13 @@ namespace SwimProAcadamy.DAL
             using (MySqlConnection connection = DatabaseHelper.GetConnection())
             using (MySqlCommand command = new MySqlCommand(
                 @"UPDATE training_plans 
-                  SET plan_name = @name, sessions_per_week = @sessions, weekly_fee = @fee, competition_allowed = @compAllowed, is_active = @isActive
+                  SET plan_name = @name, sessions_per_week = @sessions, weekly_fee = @fee, monthly_fee = @monthlyFee, competition_allowed = @compAllowed, is_active = @isActive
                   WHERE id = @id", connection))
             {
                 command.Parameters.AddWithValue("@name", plan.PlanName.Trim());
                 command.Parameters.AddWithValue("@sessions", plan.SessionsPerWeek);
                 command.Parameters.AddWithValue("@fee", plan.WeeklyFee);
+                command.Parameters.AddWithValue("@monthlyFee", plan.WeeklyFee * 4m);
                 command.Parameters.AddWithValue("@compAllowed", plan.CompetitionAllowed ? 1 : 0);
                 command.Parameters.AddWithValue("@isActive", plan.IsActive ? 1 : 0);
                 command.Parameters.AddWithValue("@id", plan.TrainingPlanId);
